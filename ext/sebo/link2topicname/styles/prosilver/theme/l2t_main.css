@@ -1,0 +1,85 @@
+.l2t-popup-container {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 350px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-family: sans-serif;
+    z-index: 9999;
+    border-radius: 5px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+/* Bubble arrow */
+.l2t-popup-arrow {
+    position: absolute;
+    bottom: -8px;
+    left: var(--arrow-left);
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #fff;
+    filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.1));
+}
+
+/* Freccia verso l'alto, quando popup è sotto il link */
+.l2t-popup-below .l2t-popup-arrow {
+    bottom: auto;
+    top: -8px;
+    border-top: none;
+    border-bottom: 8px solid #fff;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+}
+
+.l2t-thumbnail {
+    width: 60px;
+    height: auto;
+}
+
+.l2t-popup-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.l2t-popup-thumb {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.l2t-popup-text {
+    font-size: 14px;
+    color: #333;
+}
+
+/* icon FA */
+.icon-stack {
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+}
+
+.icon-stack .bg {
+    font-size: 1.2em;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.icon-stack .fg {
+    font-size: 0.7em; /* o quanto ti serve */
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,47 @@
+<!-- INCLUDECSS @sebo_link2topicname/l2t_main.css -->
+<!-- INCLUDEJS @sebo_link2topicname/view_popup.js -->
+    <div class="l2t-popup-content" style="display: flex; gap: 1rem; align-items: flex-start;">
+    {% if tpl_view_avatar %}
+        <div class="l2t-left" style="text-align: center;">
+            {% if user_avatar %}
+                {{ user_avatar }}
+            {% endif %}
+
+            {% if user_rank_title or rank_img_src %}
+                <div class="profile-rank" style="margin-top: 0.5rem;">
+                    {{ user_rank_title }}
+                    {% if user_rank_title and rank_img_src %}
+                        <br />
+                    {% endif %}
+                    {% if rank_img_src %}
+                        <img src="{{ rank_img_src }}" alt="{{ rank_img_alt|e }}" />
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        </div>
+    {% endif %}
+
+    <div class="l2t-right">
+        <p class="l2t-popup-text" style="margin: 0;">
+            {% if post_subject and post_subject != topic_title %}
+                {{ post_subject }} in <strong>{{ topic_title }}</strong>
+            {% else %}
+                <strong>{{ topic_title }}</strong>
+            {% endif %}
+            
+            {% if tpl_view_forum and forum_name %}
+                <small><em>{{ forum_name }}</em></small>
+            {% endif %}
+
+            {% if tpl_view_username and username %}
+                <br>di <span style="color:#{{ user_colour }}">{{ username }}</span> {{ user_rank }}
+            {% endif %}
+            
+            {% if tpl_view_text and post_excerpt %}
+                <br><small>{{ post_excerpt }}</small>
+            {% endif %}
+        </p>
+    </div>
+    <div class="l2t-popup-arrow"></div>
+</div>

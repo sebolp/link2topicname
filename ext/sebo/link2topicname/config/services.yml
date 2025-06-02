@@ -1,0 +1,22 @@
+services:
+    sebo.link2topicname.controller.acp:
+        class: sebo\link2topicname\controller\acp_controller
+        arguments:
+            - '@dbal.conn'
+            - '@language'
+            - '@log'
+            - '@request'
+            - '@template'
+            - '%core.table_prefix%'
+
+    sebo.link2topicname.listener:
+        class: sebo\link2topicname\event\main_listener
+        arguments:
+            - '@language'
+            - '@dbal.conn'
+            - '@template'
+            - '%core.php_ext%'
+            - '%core.root_path%'
+            - '%core.table_prefix%'
+        tags:
+            - { name: event.listener }

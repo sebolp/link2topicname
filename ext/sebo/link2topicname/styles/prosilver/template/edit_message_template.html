@@ -1,0 +1,17 @@
+<a href="{{ href }}" class="l2t-link" data-popup-id="{{ popup_id }}">
+  <span class="icon-stack">
+    <i class="fa fa-square bg"></i>
+    <i class="fa fa-link fg fa-inverse"></i>
+  </span>
+  {% if post_subject is defined and post_subject and post_subject != topic_title %}
+    {{ post_subject|e }} in <strong>{{ topic_title|e }}</strong>
+  {% else %}
+    <strong>{{ topic_title|e }}</strong>
+  {% endif %}
+</a>
+
+{% if tpl_view_popup %}
+  <div id="{{ popup_id }}" class="l2t-hidden-popup" style="display: none;">
+    {{ popup_html|raw }}
+  </div>
+{% endif %}
