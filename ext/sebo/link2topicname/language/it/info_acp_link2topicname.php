@@ -42,7 +42,7 @@ $lang = array_merge($lang, [
 
 	'ACP_link2topicname_ENABLE_POPUP_REQ' => 'Vuoi abilitare la visualizzazione del popup di anteprima?',
 
-	'ACP_link2topicname_CAR_LENGTH' => 'Imposta la lunghezza di caratteri dell\'anteprima messaggio (0 vuol dire visualizzare intero post',
+	'ACP_link2topicname_CAR_LENGTH' => 'Imposta la lunghezza di caratteri dell\'anteprima messaggio (0 vuol dire visualizzare l\'intero post)',
 	'ACP_link2topicname_VIEW_TEXT' => 'Vuoi visualizzare l\'anteprima del messaggio?',
 	'ACP_link2topicname_VIEW_AVATAR' => 'Vuoi visualizzare l\'avatar?',
 	'ACP_link2topicname_VIEW_FORUM' => 'Vuoi visualizzare il forum di provenienza?',
