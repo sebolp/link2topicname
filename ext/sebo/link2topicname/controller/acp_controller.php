@@ -36,6 +36,9 @@ class acp_controller
 	/** @var table_prefix */
 	protected $table_prefix;
 
+	/** @var \phpbb\user */
+	protected $user;
+
 	public function __construct
 	(
 	\phpbb\db\driver\driver_interface $db,
@@ -43,7 +46,8 @@ class acp_controller
 	\phpbb\log\log $log,
 	\phpbb\request\request $request,
 	\phpbb\template\template $template,
-	$table_prefix
+	$table_prefix,
+	\phpbb\user $user
 	)
 	{
 		$this->db		= $db;
@@ -52,6 +56,7 @@ class acp_controller
 		$this->request	= $request;
 		$this->template	= $template;
 		$this->table_prefix = $table_prefix;
+		$this->user = $user;
 	}
 
 	public function display_options()
@@ -118,8 +123,8 @@ class acp_controller
 				// Add option settings change action to the admin log
 				$this->log->add(
 					'admin',
-					$this->user->data['user_id'],
-					$this->user->ip,
+					(int) $this->user->data['user_id'],
+					$this->user->data['user_ip'],
 					'LOG_ACP_LINK2TOPICNAME_SETTINGS',
 					time(),
 					[]

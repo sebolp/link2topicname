@@ -8,6 +8,8 @@ services:
             - '@request'
             - '@template'
             - '%core.table_prefix%'
+            - '@user'
+            
 
     sebo.link2topicname.listener:
         class: sebo\link2topicname\event\main_listener
