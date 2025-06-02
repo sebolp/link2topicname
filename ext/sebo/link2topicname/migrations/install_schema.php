@@ -12,12 +12,12 @@
 
 	class install_schema extends \phpbb\db\migration\migration
 	{
-	
+
 		public static function depends_on()
 		{
 			return ['\phpbb\db\migration\data\v320\v320'];
 		}
-	
+
 		public function update_schema()
 		{
 			return [
@@ -35,7 +35,7 @@
 			],
 			];
 		}
-	
+
 		public function revert_schema()
 		{
 			return [

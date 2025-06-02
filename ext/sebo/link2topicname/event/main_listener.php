@@ -61,7 +61,7 @@
 			$this->table_prefix = $table_prefix;
 			$this->load_settings();
 		}
-	
+
 		protected function load_settings(): void
 		{
 			$sql = 'SELECT car_length, view_username, view_avatar, view_forum, view_popup, view_text
@@ -70,7 +70,7 @@
 			$result = $this->db->sql_query($sql);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
-		
+
 			if ($row)
 			{
 				$this->settings = [
@@ -104,12 +104,12 @@
 			$result = $this->db->sql_query($sql);
 			$user_row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
-		
+
 			if (!$user_row)
 			{
 				return [];
 			}
-		
+
 			$user_info = [
 			'username' => $user_row['username'],
 			'user_colour' => $user_row['user_colour'],
@@ -118,7 +118,7 @@
 			'rank_img_src' => '',
 			'rank_img_alt' => '',
 			];
-		
+
 			$user_rank_id = (int) $user_row['user_rank'];
 			if ($user_rank_id)
 			{
@@ -126,7 +126,7 @@
 				$result_rank = $this->db->sql_query($sql_rank);
 				$rank_row = $this->db->sql_fetchrow($result_rank);
 				$this->db->sql_freeresult($result_rank);
-			
+
 				if ($rank_row)
 				{
 					$user_info['rank_title'] = $rank_row['rank_title'];
@@ -137,7 +137,7 @@
 					}
 				}
 			}
-		
+
 			return $user_info;
 		}
 
@@ -155,7 +155,7 @@
 
 			$post_excerpt = html_entity_decode(strip_tags($row['post_text']));
 			$max_length = $this->settings['car_length'] ?? 120;
-		
+
 			if ($max_length > 0 && mb_strlen($post_excerpt) > $max_length)
 			{
 				$post_excerpt = mb_substr($post_excerpt, 0, $max_length) . '...';
@@ -218,10 +218,14 @@
 					{
 						$type = 'p';
 						$id = (int) $params['p'];
-						} else if (isset($params['t'])) {
+						}
+						else if (isset($params['t']))
+						{
 						$type = 't';
 						$id = (int) $params['t'];
-						} else if (isset($params['f'])) {
+						}
+						else if (isset($params['f']))
+						{
 						$type = 'f';
 						$id = (int) $params['f'];
 					}
