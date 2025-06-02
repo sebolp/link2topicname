@@ -22,10 +22,19 @@ $lang = array_merge($lang, [
 	'ACP_link2topicname_TITLE'	=> 'Link 2 Topic Name',
 	'ACP_link2topicname'			=> 'L2TN Settings',
 
-	'ACP_link2topicname_EXPLAIN'	=> 'Attenzione: l\'estensione riconosce automaticamente dove è installato il tuo phpBB, ma potrebbe essere necessario inserire "Censura parole" da "Contenuti > Messaggi > Censura parole" per trasformare http:// in https:// o viceversa, ed includere o escludere www da tutti i link. Questo dipende dalle impostazioni di installazione del tuo forum.',
+	'ACP_link2topicname_EXPLAIN_ADV'	=> 'Attenzione:',
+	'ACP_link2topicname_EXPLAIN'	=> 'l\'estensione riconosce automaticamente dove è installato il tuo phpBB, ma potrebbe essere necessario inserire "Censura parole" da ',
+	'ACP_link2topicname_EXPLAIN_POSTING'	=> 'Contenuti',
+	'ACP_link2topicname_EXPLAIN_MESSAGES'	=> 'Messaggi',
+	'ACP_link2topicname_EXPLAIN_WC'	=> 'Censura parole',
+	'ACP_link2topicname_EXPLAIN_FINAL'	=> 'per trasformare "http://" in "https://" o viceversa, ed includere o escludere "www" da tutti i link. Questo dipende dalle impostazioni di installazione del tuo forum.',
+	'ACP_link2topicname_ARROW' => '<i class="fa icon fa-chevron-right fa-fw" aria-hidden="true"></i>',
 
 	'PP_ME'					=> 'Offrimi una birra per questa estensione',
-	'PP_ME_EXT'				=> '<label>Fai una donazione per questa estensione:</label><br><span>Questa estensione è completamente gratuita. E\' un progetto su cui ho speso del tempo per imparare e condividere con la community phpBB. Se ti piace questa estensione, o ha migliorato il tuo forum, prendi in considerazione l\'idea di <a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener">offrirmi una birra</a>. Grazie mille anche solo per aver scaricato Link2TopicName!</span>',
+	'PP_ME_EXT_DONATE'		=> 'Fai una donazione per questa estensione',
+	'PP_ME_EXT_FIRST'		=> 'Questa estensione è completamente gratuita. E\' un progetto su cui ho speso del tempo per imparare e condividere con la community phpBB. Se ti piace questa estensione, o ha migliorato il tuo forum, prendi in considerazione l\'idea di ',
+	'PP_ME_EXT_OFFER'		=> 'offrirmi una birra!',
+	'PP_ME_EXT_THX'		=> 'Grazie mille anche solo per aver scaricato Link2TopicName!',
 	'PP_ME_EXT_ALT'			=> 'Effettua una donazione con PayPal',
 
 	'ACP_ENABLE_POPUP_TITLE'=> 'Abilita la visualizzazione del popup con l\'anteprima del messaggio',

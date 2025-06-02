@@ -15,81 +15,109 @@
 		<legend>{{ lang('PP_ME') }}</legend>
 		<dl>
 			<dt>
-				{{ lang('PP_ME_EXT') }}
+				<strong>{{ lang('PP_ME_EXT_DONATE') ~ lang('COLON') }}</strong><br><span>{{ lang('PP_ME_EXT_FIRST') }}<a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener">{{ lang('PP_ME_EXT_OFFER') }}</a>{{ lang('PP_ME_EXT_THX') }}</span>',
 			</dt>
 			<dd><img src="../ext/sebo/link2topicname/adm/style/wink_beer.png" width="32px" height="32px"> <a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png" alt="{{ lang('PP_ME_EXT_ALT') }}"></a></dd>
 		</dl>
 	</fieldset>
 	
 	<fieldset>
+		<strong>{{ lang('ACP_link2topicname_EXPLAIN_ADV') }}</strong><br>
 		{{ lang('ACP_link2topicname_EXPLAIN') }}
+		<ul>
+			<li>{{ lang('ACP_link2topicname_EXPLAIN_POSTING') }} {{ lang('ACP_link2topicname_ARROW') }} {{ lang('ACP_link2topicname_EXPLAIN_MESSAGES') }} {{ lang('ACP_link2topicname_ARROW') }} {{ lang('ACP_link2topicname_EXPLAIN_WC') }}</li>
+		</ul>
+		{{ lang('ACP_link2topicname_EXPLAIN_FINAL') }}
 	</fieldset>
 	
 	<fieldset>
 		<legend>{{ lang('ACP_ENABLE_POPUP_TITLE') }}</legend>
 		<dl>
-			<dt><label for="view_popup">{{ lang('ACP_link2topicname_ENABLE_POPUP_REQ') ~ lang('COLON') }}</label></dt>
+			<dt><strong>{{ lang('ACP_link2topicname_ENABLE_POPUP_REQ') ~ lang('COLON') }}</strong></dt>
 			<dd>
-				<label>
-					<input type="radio" class="radio" name="view_popup" value="1" {% if tpl_view_popup %}checked="checked"{% endif %} />
+				<label for="view_popup_1">
+					<input type="radio" class="radio" name="view_popup" id="view_popup_1" value="1" {% if tpl_view_popup %}checked="checked"{% endif %} />
 					{{ lang('YES') }}
 				</label>
-				<label>
-					<input type="radio" class="radio" name="view_popup" value="0" {% if not tpl_view_popup %}checked="checked"{% endif %} />
+				<label for="view_popup_0">
+					<input type="radio" class="radio" name="view_popup" id="view_popup_0" value="0" {% if not tpl_view_popup %}checked="checked"{% endif %} />
 					{{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
-		
 	</fieldset>
 	
 	<fieldset>
 		<legend>{{ lang('ACP_SETTINGS_TITLE') }}</legend>
+
 		<dl>
-			<dt><label for="view_username">{{ lang('ACP_link2topicname_VIEW_USERNAME') }}</label></dt>
+			<dt><strong>{{ lang('ACP_link2topicname_VIEW_USERNAME') }}</strong></dt>
 			<dd>
-				<label><input type="radio" class="radio" name="view_username" value="1" {% if tpl_view_username %}checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-				<label><input type="radio" class="radio" name="view_username" value="0" {% if not tpl_view_username %}checked="checked"{% endif %} /> {{ lang('NO') }}</label>
-			</dd>
-		</dl>
-		
-		<dl>
-			<dt><label for="view_forum">{{ lang('ACP_link2topicname_VIEW_FORUM') }}</label></dt>
-			<dd>
-				<label><input type="radio" class="radio" name="view_forum" value="1" {% if tpl_view_forum %}checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-				<label><input type="radio" class="radio" name="view_forum" value="0" {% if not tpl_view_forum %}checked="checked"{% endif %} /> {{ lang('NO') }}</label>
-			</dd>
-		</dl>
-		
-		<dl>
-			<dt><label for="view_avatar">{{ lang('ACP_link2topicname_VIEW_AVATAR') }}</label></dt>
-			<dd>
-				<label><input type="radio" class="radio" name="view_avatar" value="1" {% if tpl_view_avatar %}checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-				<label><input type="radio" class="radio" name="view_avatar" value="0" {% if not tpl_view_avatar %}checked="checked"{% endif %} /> {{ lang('NO') }}</label>
-			</dd>
-		</dl>
-		<dl>
-			<dt><label for="view_text">{{ lang('ACP_link2topicname_VIEW_TEXT') }}</label></dt>
-			<dd>
-				<label>
-					<input type="radio" class="radio" name="view_text" value="1" {% if tpl_view_text %}checked="checked"{% endif %} /> {{ lang('YES') }}
+				<label for="view_username_1">
+					<input type="radio" class="radio" name="view_username" id="view_username_1" value="1" {% if tpl_view_username %}checked="checked"{% endif %} />
+					{{ lang('YES') }}
 				</label>
-				<label>
-					<input type="radio" class="radio" name="view_text" value="0" {% if not tpl_view_text %}checked="checked"{% endif %} /> {{ lang('NO') }}
+				<label for="view_username_0">
+					<input type="radio" class="radio" name="view_username" id="view_username_0" value="0" {% if not tpl_view_username %}checked="checked"{% endif %} />
+					{{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
+
 		<dl>
-		<dt><label for="car_length">{{ lang('ACP_link2topicname_CAR_LENGTH') ~ lang('COLON') }}</label></dt>
-		<dd><label><input type="text" name="car_length" value="{{ tpl_car_length }}" /> </label></dd>
-	</dl>
-</fieldset>
+			<dt><strong>{{ lang('ACP_link2topicname_VIEW_FORUM') }}</strong></dt>
+			<dd>
+				<label for="view_forum_1">
+					<input type="radio" class="radio" name="view_forum" id="view_forum_1" value="1" {% if tpl_view_forum %}checked="checked"{% endif %} />
+					{{ lang('YES') }}
+				</label>
+				<label for="view_forum_0">
+					<input type="radio" class="radio" name="view_forum" id="view_forum_0" value="0" {% if not tpl_view_forum %}checked="checked"{% endif %} />
+					{{ lang('NO') }}
+				</label>
+			</dd>
+		</dl>
 
-<fieldset class="submit-buttons">
-	<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />
-	{{ S_FORM_TOKEN }}
-</fieldset>
+		<dl>
+			<dt><strong>{{ lang('ACP_link2topicname_VIEW_AVATAR') }}</strong></dt>
+			<dd>
+				<label for="view_avatar_1">
+					<input type="radio" class="radio" name="view_avatar" id="view_avatar_1" value="1" {% if tpl_view_avatar %}checked="checked"{% endif %} />
+					{{ lang('YES') }}
+				</label>
+				<label for="view_avatar_0">
+					<input type="radio" class="radio" name="view_avatar" id="view_avatar_0" value="0" {% if not tpl_view_avatar %}checked="checked"{% endif %} />
+					{{ lang('NO') }}
+				</label>
+			</dd>
+		</dl>
 
+		<dl>
+			<dt><strong>{{ lang('ACP_link2topicname_VIEW_TEXT') }}</strong></dt>
+			<dd>
+				<label for="view_text_1">
+					<input type="radio" class="radio" name="view_text" id="view_text_1" value="1" {% if tpl_view_text %}checked="checked"{% endif %} />
+					{{ lang('YES') }}
+				</label>
+				<label for="view_text_0">
+					<input type="radio" class="radio" name="view_text" id="view_text_0" value="0" {% if not tpl_view_text %}checked="checked"{% endif %} />
+					{{ lang('NO') }}
+				</label>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt><label for="car_length"><strong>{{ lang('ACP_link2topicname_CAR_LENGTH') ~ lang('COLON') }}</strong></label></dt>
+			<dd>
+				<input type="text" name="car_length" id="car_length" value="{{ tpl_car_length }}" />
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />
+		{{ S_FORM_TOKEN }}
+	</fieldset>
 </form>
 
 {% include 'overall_footer.html' %}

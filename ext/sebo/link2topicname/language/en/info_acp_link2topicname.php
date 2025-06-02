@@ -22,10 +22,19 @@ $lang = array_merge($lang, [
 	'ACP_link2topicname_TITLE'	=> 'Link 2 Topic Name',
 	'ACP_link2topicname'			=> 'L2TN Settings',
 
-	'ACP_link2topicname_EXPLAIN'	=> 'Please note: the extension automatically detects where your phpBB is installed, but you may need to edit "Word censoring" from "Posting > Messages > Word censoring" to change http:// to https:// or vice versa, and include or exclude www from all links. This depends on your board installation settings.',
+	'ACP_link2topicname_EXPLAIN_ADV'	=> 'Please note:',
+	'ACP_link2topicname_EXPLAIN'	=> 'the extension automatically detects where your phpBB is installed, but you may need to edit "Word censoring" from',
+	'ACP_link2topicname_EXPLAIN_POSTING'	=> 'Posting',
+	'ACP_link2topicname_EXPLAIN_MESSAGES'	=> 'Messages',
+	'ACP_link2topicname_EXPLAIN_WC'	=> 'Word censoring',
+	'ACP_link2topicname_EXPLAIN_FINAL'	=> 'to change "http://" to "https://" or vice versa, and include or exclude "www" from all links. This depends on your board installation settings.',
+	'ACP_link2topicname_ARROW' => '<i class="fa icon fa-chevron-right fa-fw" aria-hidden="true"></i>',
 
 	'PP_ME'					=> 'Buy me a beer for creating this extension',
-	'PP_ME_EXT'				=> '<label>Make a donation for this extension:</label><br><span>This extension is completely free. It is a project that I spend my time on for the enjoyment and use of the phpBB community. If you enjoy using this extension, or if it has benefited your forum, please consider <a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener">buying me a beer</a>. It would be greatly appreciated. Thank you for downloading Link2TopicName!</span>',
+	'PP_ME_EXT_DONATE'		=> 'Make a donation for this extension',
+	'PP_ME_EXT_FIRST'		=> 'This extension is completely free. It is a project into wich i\'ve spent my time to learn code, have fun and for the phpBB community. If you enjoy using this extension, or if it has benefited your forum, please consider ',
+	'PP_ME_EXT_OFFER'		=> 'buying me a beer!',
+	'PP_ME_EXT_THX'		=> 'It would be greatly appreciated. Thank you for downloading Link2TopicName!',
 	'PP_ME_EXT_ALT'			=> 'Donate via PayPal',
 
 	'ACP_ENABLE_POPUP_TITLE'     => 'Enable post popup display',
