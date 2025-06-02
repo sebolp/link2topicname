@@ -25,7 +25,7 @@ $lang = array_merge($lang, [
 	'ACP_link2topicname_EXPLAIN'	=> 'Attenzione: l\'estensione riconosce automaticamente dove è installato il tuo phpBB, ma potrebbe essere necessario inserire "Censura parole" da "Contenuti > Messaggi > Censura parole" per trasformare http:// in https:// o viceversa, ed includere o escludere www da tutti i link. Questo dipende dalle impostazioni di installazione del tuo forum.',
 
 	'PP_ME'					=> 'Offrimi una birra per questa estensione',
-	'PP_ME_EXT'				=> '<label>Fai una donazione per questa estensione:</label><br><span>Questa estensione è completamente gratuita. E\' un progetto su cui ho speso del tempo per imparare e condividere con la community phpBB. Se ti piace questa estensione, o ha migliorato il tuo forum, prendi in considerazione l\'idea di <a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener">offrirmi una birra</a>. Grazie mille anche solo per aver scaricato link2topicname!</span>',
+	'PP_ME_EXT'				=> '<label>Fai una donazione per questa estensione:</label><br><span>Questa estensione è completamente gratuita. E\' un progetto su cui ho speso del tempo per imparare e condividere con la community phpBB. Se ti piace questa estensione, o ha migliorato il tuo forum, prendi in considerazione l\'idea di <a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener">offrirmi una birra</a>. Grazie mille anche solo per aver scaricato Link2TopicName!</span>',
 	'PP_ME_EXT_ALT'			=> 'Effettua una donazione con PayPal',
 
 	'ACP_ENABLE_POPUP_TITLE'=> 'Abilita la visualizzazione del popup con l\'anteprima del messaggio',
