@@ -115,6 +115,15 @@ class acp_controller
 				// Confirm this to the user and provide (automated) link back to previous page
 				meta_refresh(3, $this->u_action);
 				$message = $this->language->lang('L2TN_UPDATED') . '<br /><br />' . $this->language->lang('RETURN_ACP', $this->u_action);
+				// Add option settings change action to the admin log
+				$this->log->add(
+					'admin',
+					$this->user->data['user_id'],
+					$this->user->ip,
+					'LOG_ACP_LINK2TOPICNAME_SETTINGS',
+					time(),
+					[]
+				);
 				trigger_error($message);
 			}
 			else
@@ -124,8 +133,6 @@ class acp_controller
 				$errors[] = $message;
 			}
 
-			// Add option settings change action to the admin log
-			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACP_link2topicname_SETTINGS');
 		}
 
 		$s_errors = !empty($errors);
