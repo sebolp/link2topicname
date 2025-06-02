@@ -32,7 +32,7 @@ class acp_controller
 
 	/** @var string Custom form action */
 	protected $u_action;
-	
+
 	/** @var table_prefix */
 	protected $table_prefix;
 
@@ -43,7 +43,7 @@ class acp_controller
 	\phpbb\log\log $log,
 	\phpbb\request\request $request,
 	\phpbb\template\template $template,
-	$table_prefix	
+	$table_prefix
 	)
 	{
 		$this->db		= $db;
@@ -69,18 +69,18 @@ class acp_controller
 		$result = $this->db->sql_query($sql);
 		$settings = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
-		
+
 		$template_vars_settings = [
 			'tpl_view_username' => (bool) $settings['view_username'],
 			'tpl_view_avatar'   => (bool) $settings['view_avatar'],
 			'tpl_view_forum'    => (bool) $settings['view_forum'],
 			'tpl_view_popup'    => (bool) $settings['view_popup'],
 			'tpl_view_text'     => (bool) $settings['view_text'],
-			'tpl_car_length'    => (int)  $settings['car_length'],
+			'tpl_car_length'    => (int) $settings['car_length'],
 		];
 
 		$this->template->assign_vars($template_vars_settings);
-						
+
 		// Is the form being submitted to us?
 		if ($this->request->is_set_post('submit'))
 		{
@@ -110,14 +110,14 @@ class acp_controller
 						`car_length` = ' . $car_length;
 
 				$this->db->sql_query($sql);
-						
+
 				// Option settings have been updated
 				// Confirm this to the user and provide (automated) link back to previous page
 				meta_refresh(3, $this->u_action);
 				$message = $this->language->lang('L2TN_UPDATED') . '<br /><br />' . $this->language->lang('RETURN_ACP', $this->u_action);
 				trigger_error($message);
 			}
-			else 
+			else
 			{
 				meta_refresh(3, $this->u_action);
 				$message = $this->language->lang('L2TN_NOT_UPDATED');

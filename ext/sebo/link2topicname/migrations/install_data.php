@@ -3,7 +3,7 @@
  *
  * link2topicname. An extension for the phpBB Forum Software package.
  *
- * @copyright (c) 2025, sebo, https://www.fiatpandaclub.org - Thanks Chris1278!
+ * @copyright (c) 2025, sebo, https://www.fiatpandaclub.org
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
@@ -22,7 +22,7 @@ class install_data extends \phpbb\db\migration\migration
 			['custom', [[$this, 'table_l2t_install']]],
 		];
 	}
-	
+
 	public function table_l2t_install()
 	{
 		$data = [
