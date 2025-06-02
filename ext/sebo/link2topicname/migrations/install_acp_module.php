@@ -36,7 +36,7 @@ class install_acp_module extends \phpbb\db\migration\migration
 			]],
 		];
 	}
-	
+
 	public function revert_schema()
 	{
 		return [

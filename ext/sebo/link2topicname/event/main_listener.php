@@ -64,7 +64,7 @@
 
 		protected function load_settings(): void
 		{
-			$sql = 'SELECT * FROM ' . $this->table_prefix . 'sebo_l2t_settings'; 
+			$sql = 'SELECT * FROM ' . $this->table_prefix . 'sebo_l2t_settings';
 			$result = $this->db->sql_query($sql);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
