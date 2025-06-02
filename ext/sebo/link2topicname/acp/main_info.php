@@ -19,12 +19,12 @@ class main_info
 	{
 		return [
 			'filename'	=> '\sebo\link2topicname\acp\main_module',
-			'title'		=> 'ACP_link2topicname_TITLE',
+			'title'		=> 'ACP_LINK2TOPICNAME_TITLE',
 			'modes'		=> [
 				'settings'	=> [
-					'title'	=> 'ACP_link2topicname',
+					'title'	=> 'ACP_LINK2TOPICNAME',
 					'auth'	=> 'ext_sebo/link2topicname && acl_a_board',
-					'cat'	=> ['ACP_link2topicname_TITLE'],
+					'cat'	=> ['ACP_LINK2TOPICNAME_TITLE'],
 				],
 			],
 		];

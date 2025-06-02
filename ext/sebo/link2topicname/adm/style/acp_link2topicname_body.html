@@ -1,6 +1,6 @@
 {% include 'overall_header.html' %}
 
-<h1>{{ lang('ACP_link2topicname_TITLE') }}</h1>
+<h1>{{ lang('ACP_LINK2TOPICNAME_TITLE') }}</h1>
 
 {% if S_ERROR %}
 <div class="errorbox">
@@ -9,31 +9,31 @@
 </div>
 {% endif %}
 
-<form id="sebo_link2topicname_acp" name="sebo_link2topicname_acp" method="post" action="{{ U_ACTION }}">
+<form id="sebo_LINK2TOPICNAME_acp" name="sebo_LINK2TOPICNAME_acp" method="post" action="{{ U_ACTION }}">
 	
 	<fieldset>
 		<legend>{{ lang('PP_ME') }}</legend>
 		<dl>
 			<dt>
-				<strong>{{ lang('PP_ME_EXT_DONATE') ~ lang('COLON') }}</strong><br><span>{{ lang('PP_ME_EXT_FIRST') }}<a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener">{{ lang('PP_ME_EXT_OFFER') }}</a>{{ lang('PP_ME_EXT_THX') }}</span>',
+				<strong>{{ lang('PP_ME_EXT_DONATE') ~ lang('COLON') }}</strong><br><span>{{ lang('PP_ME_EXT_FIRST') }}<a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener">{{ lang('PP_ME_EXT_OFFER') }}</a>{{ lang('PP_ME_EXT_THX') }}</span>
 			</dt>
-			<dd><img src="../ext/sebo/link2topicname/adm/style/wink_beer.png" width="32px" height="32px"> <a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png" alt="{{ lang('PP_ME_EXT_ALT') }}"></a></dd>
+			<dd><img src="../ext/sebo/LINK2TOPICNAME/adm/style/wink_beer.png" width="32px" height="32px"> <a href="https://www.paypal.com/donate/?hosted_button_id=GS3T9MFDJJGT4" target="_blank" rel="noreferrer noopener"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png" alt="{{ lang('PP_ME_EXT_ALT') }}"></a></dd>
 		</dl>
 	</fieldset>
 	
 	<fieldset>
-		<strong>{{ lang('ACP_link2topicname_EXPLAIN_ADV') }}</strong><br>
-		{{ lang('ACP_link2topicname_EXPLAIN') }}
+		<strong>{{ lang('ACP_LINK2TOPICNAME_EXPLAIN_ADV') }}</strong><br>
+		{{ lang('ACP_LINK2TOPICNAME_EXPLAIN') }}
 		<ul>
-			<li>{{ lang('ACP_link2topicname_EXPLAIN_POSTING') }} {{ lang('ACP_link2topicname_ARROW') }} {{ lang('ACP_link2topicname_EXPLAIN_MESSAGES') }} {{ lang('ACP_link2topicname_ARROW') }} {{ lang('ACP_link2topicname_EXPLAIN_WC') }}</li>
+			<li>{{ lang('ACP_LINK2TOPICNAME_EXPLAIN_POSTING') }} {{ lang('ACP_LINK2TOPICNAME_ARROW') }} {{ lang('ACP_LINK2TOPICNAME_EXPLAIN_MESSAGES') }} {{ lang('ACP_LINK2TOPICNAME_ARROW') }} {{ lang('ACP_LINK2TOPICNAME_EXPLAIN_WC') }}</li>
 		</ul>
-		{{ lang('ACP_link2topicname_EXPLAIN_FINAL') }}
+		{{ lang('ACP_LINK2TOPICNAME_EXPLAIN_FINAL') }}
 	</fieldset>
 	
 	<fieldset>
 		<legend>{{ lang('ACP_ENABLE_POPUP_TITLE') }}</legend>
 		<dl>
-			<dt><strong>{{ lang('ACP_link2topicname_ENABLE_POPUP_REQ') ~ lang('COLON') }}</strong></dt>
+			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_ENABLE_POPUP_REQ') ~ lang('COLON') }}</strong></dt>
 			<dd>
 				<label for="view_popup_1">
 					<input type="radio" class="radio" name="view_popup" id="view_popup_1" value="1" {% if tpl_view_popup %}checked="checked"{% endif %} />
@@ -51,7 +51,7 @@
 		<legend>{{ lang('ACP_SETTINGS_TITLE') }}</legend>
 
 		<dl>
-			<dt><strong>{{ lang('ACP_link2topicname_VIEW_USERNAME') }}</strong></dt>
+			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_USERNAME') }}</strong></dt>
 			<dd>
 				<label for="view_username_1">
 					<input type="radio" class="radio" name="view_username" id="view_username_1" value="1" {% if tpl_view_username %}checked="checked"{% endif %} />
@@ -65,7 +65,7 @@
 		</dl>
 
 		<dl>
-			<dt><strong>{{ lang('ACP_link2topicname_VIEW_FORUM') }}</strong></dt>
+			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_FORUM') }}</strong></dt>
 			<dd>
 				<label for="view_forum_1">
 					<input type="radio" class="radio" name="view_forum" id="view_forum_1" value="1" {% if tpl_view_forum %}checked="checked"{% endif %} />
@@ -79,7 +79,7 @@
 		</dl>
 
 		<dl>
-			<dt><strong>{{ lang('ACP_link2topicname_VIEW_AVATAR') }}</strong></dt>
+			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_AVATAR') }}</strong></dt>
 			<dd>
 				<label for="view_avatar_1">
 					<input type="radio" class="radio" name="view_avatar" id="view_avatar_1" value="1" {% if tpl_view_avatar %}checked="checked"{% endif %} />
@@ -93,7 +93,7 @@
 		</dl>
 
 		<dl>
-			<dt><strong>{{ lang('ACP_link2topicname_VIEW_TEXT') }}</strong></dt>
+			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_TEXT') }}</strong></dt>
 			<dd>
 				<label for="view_text_1">
 					<input type="radio" class="radio" name="view_text" id="view_text_1" value="1" {% if tpl_view_text %}checked="checked"{% endif %} />
@@ -107,7 +107,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="car_length"><strong>{{ lang('ACP_link2topicname_CAR_LENGTH') ~ lang('COLON') }}</strong></label></dt>
+			<dt><label for="car_length"><strong>{{ lang('ACP_LINK2TOPICNAME_CAR_LENGTH') ~ lang('COLON') }}</strong></label></dt>
 			<dd>
 				<input type="text" name="car_length" id="car_length" value="{{ tpl_car_length }}" />
 			</dd>

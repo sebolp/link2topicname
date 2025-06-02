@@ -37,7 +37,7 @@ class main_module
 		$this->tpl_name = 'acp_link2topicname_body';
 
 		// Set the page title for our ACP page
-		$this->page_title = 'ACP_link2topicname_TITLE';
+		$this->page_title = 'ACP_LINK2TOPICNAME_TITLE';
 
 		// Make the $u_action url available in our ACP controller
 		$acp_controller->set_page_url($this->u_action);

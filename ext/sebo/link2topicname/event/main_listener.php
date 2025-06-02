@@ -64,9 +64,7 @@
 
 		protected function load_settings(): void
 		{
-			$sql = 'SELECT car_length, view_username, view_avatar, view_forum, view_popup, view_text
-			FROM ' . $this->table_prefix . 'sebo_l2t_settings
-			LIMIT 1';
+			$sql = 'SELECT * FROM ' . $this->table_prefix . 'sebo_l2t_settings'; 
 			$result = $this->db->sql_query($sql);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -100,7 +98,14 @@
 			{
 				require_once($this->phpbb_root_path . 'includes/functions.' . $this->php_ext);
 			}
-			$sql = 'SELECT * FROM ' . USERS_TABLE . ' WHERE user_id = ' . (int) $user_id;
+
+			$data = [
+				'user_id' => (int) $user_id,
+			];
+
+			$sql = 'SELECT *
+			FROM ' . USERS_TABLE . '
+			WHERE ' . $this->db->sql_build_array('SELECT', $data);
 			$result = $this->db->sql_query($sql);
 			$user_row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -111,18 +116,24 @@
 			}
 
 			$user_info = [
-			'username' => $user_row['username'],
-			'user_colour' => $user_row['user_colour'],
-			'user_avatar' => phpbb_get_user_avatar($user_row),
-			'rank_title' => '',
-			'rank_img_src' => '',
-			'rank_img_alt' => '',
+				'username' => $user_row['username'],
+				'user_colour' => $user_row['user_colour'],
+				'user_avatar' => phpbb_get_user_avatar($user_row),
+				'rank_title' => '',
+				'rank_img_src' => '',
+				'rank_img_alt' => '',
 			];
 
 			$user_rank_id = (int) $user_row['user_rank'];
 			if ($user_rank_id)
 			{
-				$sql_rank = 'SELECT rank_title, rank_image FROM ' . RANKS_TABLE . ' WHERE rank_id = ' . $user_rank_id;
+				$data_rank = [
+					'rank_id' => (int) $user_rank_id,
+				];
+
+				$sql_rank = 'SELECT rank_title, rank_image
+				FROM ' . RANKS_TABLE . '
+				WHERE ' . $this->db->sql_build_array('SELECT', $data_rank);
 				$result_rank = $this->db->sql_query($sql_rank);
 				$rank_row = $this->db->sql_fetchrow($result_rank);
 				$this->db->sql_freeresult($result_rank);
@@ -143,7 +154,13 @@
 
 		protected function get_post_info(int $post_id): ?array
 		{
-			$sql = 'SELECT post_subject, forum_id, topic_id, poster_id, post_text FROM ' . POSTS_TABLE . ' WHERE post_id = ' . $post_id;
+			$data = [
+				'post_id' => (int) $post_id,
+			];
+
+			$sql = 'SELECT post_subject, forum_id, topic_id, poster_id, post_text
+			FROM ' . POSTS_TABLE . '
+			WHERE ' . $this->db->sql_build_array('SELECT', $data);
 			$result = $this->db->sql_query($sql);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -164,17 +181,23 @@
 			$user_info = $this->get_user_info((int) $row['poster_id']);
 
 			return [
-			'post_subject' => $row['post_subject'],
-			'forum_id' => (int) $row['forum_id'],
-			'topic_id' => (int) $row['topic_id'],
-			'post_excerpt' => $post_excerpt,
-			'user_info' => $user_info,
+				'post_subject' => $row['post_subject'],
+				'forum_id' => (int) $row['forum_id'],
+				'topic_id' => (int) $row['topic_id'],
+				'post_excerpt' => $post_excerpt,
+				'user_info' => $user_info,
 			];
 		}
 
 		protected function get_topic_info(int $topic_id): ?array
 		{
-			$sql = 'SELECT topic_title, forum_id, topic_poster FROM ' . TOPICS_TABLE . ' WHERE topic_id = ' . $topic_id;
+			$data = [
+				'topic_id' => (int) $topic_id,
+			];
+
+			$sql = 'SELECT topic_title, forum_id, topic_poster
+			FROM ' . TOPICS_TABLE . '
+			WHERE ' . $this->db->sql_build_array('SELECT', $data);
 			$result = $this->db->sql_query($sql);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -187,9 +210,9 @@
 			$user_info = $this->get_user_info((int) $row['topic_poster']);
 
 			return [
-			'topic_title' => $row['topic_title'],
-			'forum_id' => (int) $row['forum_id'],
-			'user_info' => $user_info,
+				'topic_title' => $row['topic_title'],
+				'forum_id' => (int) $row['forum_id'],
+				'user_info' => $user_info,
 			];
 		}
 
@@ -246,7 +269,12 @@
 					// Forum link
 					if ($type === 'f')
 					{
-						$sql = 'SELECT forum_name FROM ' . FORUMS_TABLE . ' WHERE forum_id = ' . $id;
+						$data_f = [
+							'forum_id' => (int) $id,
+						];
+						$sql = 'SELECT forum_name
+						FROM ' . FORUMS_TABLE . '
+						WHERE ' . $this->db->sql_build_array('SELECT', $data_f);
 						$result = $this->db->sql_query($sql);
 						$row = $this->db->sql_fetchrow($result);
 						$this->db->sql_freeresult($result);
@@ -300,7 +328,12 @@
 					// Forum name
 					if ($forum_id)
 					{
-						$sql = 'SELECT forum_name FROM ' . FORUMS_TABLE . ' WHERE forum_id = ' . $forum_id;
+						$data_f = [
+							'forum_id' => (int) $id,
+						];
+						$sql = 'SELECT forum_name
+						FROM ' . FORUMS_TABLE . '
+						WHERE ' . $this->db->sql_build_array('SELECT', $data_f);
 						$result = $this->db->sql_query($sql);
 						$row = $this->db->sql_fetchrow($result);
 						$this->db->sql_freeresult($result);
@@ -312,24 +345,24 @@
 					}
 
 					$template_vars_settings = [
-					'tpl_view_username' => $this->settings['view_username'],
-					'tpl_view_avatar'   => $this->settings['view_avatar'],
-					'tpl_view_forum'    => $this->settings['view_forum'],
-					'tpl_view_popup'    => $this->settings['view_popup'],
-					'tpl_view_text'     => $this->settings['view_text'],
+					'TPL_VIEW_USERNAME' => $this->settings['view_username'],
+					'TPL_VIEW_AVATAR'   => $this->settings['view_avatar'],
+					'TPL_VIEW_FORUM'    => $this->settings['view_forum'],
+					'TPL_VIEW_POPUP'    => $this->settings['view_popup'],
+					'TPL_VIEW_TEXT'     => $this->settings['view_text'],
 					];
 
 					$popup_vars = array_merge($template_vars_settings, [
-					'post_subject'   => $post_subject,
-					'post_excerpt'   => $post_excerpt ?? '',
-					'topic_title'    => $topic_title,
-					'forum_name'     => $forum_name,
-					'user_avatar'    => $user_info['user_avatar'],
-					'user_colour'    => $user_info['user_colour'],
-					'username'       => $user_info['username'],
-					'user_rank_title'=> $user_info['rank_title'],
-					'rank_img_src'   => $user_info['rank_img_src'],
-					'rank_img_alt'   => $user_info['rank_img_alt'],
+					'POST_SUBJECT'   => $post_subject,
+					'POST_EXCERPT'   => $post_excerpt ?? '',
+					'TOPIC_TITLE'    => $topic_title,
+					'FORUM_NAME'     => $forum_name,
+					'USER_AVATAR'    => $user_info['user_avatar'],
+					'USER_COLOUR'    => $user_info['user_colour'],
+					'USERNAME'       => $user_info['username'],
+					'USER_RANK_TITLE'=> $user_info['rank_title'],
+					'RANK_IMG_SRC'   => $user_info['rank_img_src'],
+					'RANK_IMG_ALT'   => $user_info['rank_img_alt'],
 					]);
 
 					global $phpbb_container;
@@ -338,12 +371,12 @@
 					$popup_html = $twig->render('@sebo_link2topicname/popup_preview.html', $popup_vars);
 
 					$replacement_data = [
-					'href'          => $full_url,
-					'popup_id'      => 'popup-' . $type . '-' . $id,
-					'post_subject'  => $post_subject,
-					'topic_title'   => $topic_title,
-					'tpl_view_popup'=> $this->settings['view_popup'],
-					'popup_html'    => $popup_html,
+					'HREF'          => $full_url,
+					'POPUP_ID'      => 'popup-' . $type . '-' . $id,
+					'POST_SUBJECT'  => $post_subject,
+					'TOPIC_TITLE'   => $topic_title,
+					'TPL_VIEW_POPUP'=> $this->settings['view_popup'],
+					'POPUP_HTML'    => $popup_html,
 					];
 
 					$link_html = $twig->render('@sebo_link2topicname/edit_message_template.html', $replacement_data);

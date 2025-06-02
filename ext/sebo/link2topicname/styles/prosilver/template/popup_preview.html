@@ -1,45 +1,44 @@
 <!-- INCLUDECSS @sebo_link2topicname/l2t_main.css -->
 <!-- INCLUDEJS @sebo_link2topicname/view_popup.js -->
-    <div class="l2t-popup-content" style="display: flex; gap: 1rem; align-items: flex-start;">
-    {% if tpl_view_avatar %}
+ <div class="l2t-popup-content" style="display: flex; gap: 1rem; align-items: flex-start;">
+    {% if TPL_VIEW_AVATAR %}
         <div class="l2t-left" style="text-align: center;">
-            {% if user_avatar %}
-                {{ user_avatar }}
+            {% if USER_AVATAR %}
+                {{ USER_AVATAR }}
             {% endif %}
 
-            {% if user_rank_title or rank_img_src %}
+            {% if USER_RANK_TITLE or RANK_IMG_SRC %}
                 <div class="profile-rank" style="margin-top: 0.5rem;">
-                    {{ user_rank_title }}
-                    {% if user_rank_title and rank_img_src %}
+                    {{ USER_RANK_TITLE }}
+                    {% if USER_RANK_TITLE and RANK_IMG_SRC %}
                         <br />
                     {% endif %}
-                    {% if rank_img_src %}
-                        <img src="{{ rank_img_src }}" alt="{{ rank_img_alt|e }}" />
+                    {% if RANK_IMG_SRC %}
+                        <img src="{{ RANK_IMG_SRC }}" alt="{{ RANK_IMG_ALT|e }}" />
                     {% endif %}
                 </div>
             {% endif %}
-
         </div>
     {% endif %}
 
     <div class="l2t-right">
         <p class="l2t-popup-text" style="margin: 0;">
-            {% if post_subject and post_subject != topic_title %}
-                {{ post_subject }} in <strong>{{ topic_title }}</strong>
+            {% if POST_SUBJECT and POST_SUBJECT != TOPIC_TITLE %}
+                {{ POST_SUBJECT }} in <strong>{{ TOPIC_TITLE }}</strong>
             {% else %}
-                <strong>{{ topic_title }}</strong>
+                <strong>{{ TOPIC_TITLE }}</strong>
             {% endif %}
             
-            {% if tpl_view_forum and forum_name %}
-                <small><em>{{ forum_name }}</em></small>
+            {% if TPL_VIEW_FORUM and FORUM_NAME %}
+                <small><em>{{ FORUM_NAME }}</em></small>
             {% endif %}
 
-            {% if tpl_view_username and username %}
-                <br>di <span style="color:#{{ user_colour }}">{{ username }}</span> {{ user_rank }}
+            {% if TPL_VIEW_USERNAME and USERNAME %}
+                <br>di <span style="color:#{{ USER_COLOUR }}">{{ USERNAME }}</span> {{ USER_RANK }}
             {% endif %}
             
-            {% if tpl_view_text and post_excerpt %}
-                <br><small>{{ post_excerpt }}</small>
+            {% if TPL_VIEW_TEXT and POST_EXCERPT %}
+                <br><small>{{ POST_EXCERPT }}</small>
             {% endif %}
         </p>
     </div>

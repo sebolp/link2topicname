@@ -24,11 +24,30 @@ class install_acp_module extends \phpbb\db\migration\migration
 			['module.add', [
 				'acp',
 				'ACP_CAT_DOT_MODS',
-				'ACP_link2topicname_TITLE'
+				'ACP_LINK2TOPICNAME_TITLE'
 			]],
 			['module.add', [
 				'acp',
-				'ACP_link2topicname_TITLE',
+				'ACP_LINK2TOPICNAME_TITLE',
+				[
+					'module_basename'	=> '\sebo\link2topicname\acp\main_module',
+					'modes'				=> ['settings'],
+				],
+			]],
+		];
+	}
+	
+	public function revert_schema()
+	{
+		return [
+			['module.remove', [
+				'acp',
+				'ACP_CAT_DOT_MODS',
+				'ACP_LINK2TOPICNAME_TITLE'
+			]],
+			['module.remove', [
+				'acp',
+				'ACP_LINK2TOPICNAME_TITLE',
 				[
 					'module_basename'	=> '\sebo\link2topicname\acp\main_module',
 					'modes'				=> ['settings'],
