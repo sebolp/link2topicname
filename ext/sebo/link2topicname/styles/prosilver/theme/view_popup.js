@@ -1,52 +1,68 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const popup = document.getElementById('l2t-popup');
+  const popup = document.createElement('div');
+  popup.className = 'l2t-popup-global';
+  document.body.appendChild(popup);
 
-    document.querySelectorAll('a.l2t-link').forEach(link => {
-        link.addEventListener('mouseenter', function () {
-            const popupId = this.dataset.popupId;
-            const hiddenPopup = document.getElementById(popupId);
-            if (!hiddenPopup) return;
+  const links = document.querySelectorAll('a.l2t-link');
 
-            popup.innerHTML = hiddenPopup.innerHTML;
+  links.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      const popupContent = link.getAttribute('data-popup');
+      if (!popupContent) return;
 
-            const rect = this.getBoundingClientRect();
-            const popupWidth = popup.offsetWidth;
-            const popupHeight = popup.offsetHeight;
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
+      popup.innerHTML = popupContent;
+      popup.style.display = 'block';
 
-            // Calcola la posizione di base (a 75% della larghezza del link)
-            let leftOffset = rect.left + window.scrollX + rect.width * 0.75 - popupWidth * 0.75;
-            let topOffset = rect.top + window.scrollY - popupHeight - 10;
+      const linkRect = link.getBoundingClientRect();
+      const popupRect = popup.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
 
-            // Controlla se esce a sinistra
-            if (leftOffset < window.scrollX + 5) {
-                leftOffset = window.scrollX + 5;
-                popup.style.setProperty('--arrow-left', `${(rect.left + rect.width * 0.75 - leftOffset) / popupWidth * 100}%`);
-            }
-            // Controlla se esce a destra
-            else if (leftOffset + popupWidth > window.scrollX + viewportWidth - 5) {
-                leftOffset = window.scrollX + viewportWidth - popupWidth - 5;
-                popup.style.setProperty('--arrow-left', `${(rect.left + rect.width * 0.75 - leftOffset) / popupWidth * 100}%`);
-            } else {
-                popup.style.setProperty('--arrow-left', '75%');
-            }
+      // Posizione orizzontale popup: non uscire dai bordi della finestra
+      let left = linkRect.left;
+      if (left + popupRect.width > viewportWidth) {
+        left = viewportWidth - popupRect.width - 10; // padding 10px
+      }
+      if (left < 10) left = 10;
 
-            // Se il popup esce sopra la finestra (ad esempio troppo in alto), sposta sotto il link
-            if (topOffset < window.scrollY + 5) {
-                topOffset = rect.bottom + window.scrollY + 10;
-                popup.classList.add('l2t-popup-below'); // aggiungi classe se vuoi cambiare la freccia
-            } else {
-                popup.classList.remove('l2t-popup-below');
-            }
+      // Decidi se sopra o sotto (popup sopra per default)
+      let top;
+      popup.classList.remove('arrow-up', 'arrow-down');
+      if (linkRect.top > popupRect.height + 10) {
+        // c'è spazio sopra
+        top = window.scrollY + linkRect.top - popupRect.height - 8;
+        popup.classList.add('arrow-down'); // freccia verso il basso, popup sopra
+      } else {
+        // altrimenti sotto
+        top = window.scrollY + linkRect.bottom + 8;
+        popup.classList.add('arrow-up'); // freccia verso l'alto, popup sotto
+      }
 
-            popup.style.left = `${leftOffset}px`;
-            popup.style.top = `${topOffset}px`;
-            popup.style.display = 'block';
-        });
+      // Calcolo posizione freccia (variabile CSS --arrow-left)
+      // La freccia deve essere all'interno del popup, mai fuori dai bordi
+      const linkWidth = linkRect.width;
+      const popupWidth = popupRect.width;
 
-        link.addEventListener('mouseleave', () => {
-            popup.style.display = 'none';
-        });
+      // Posizione freccia teorica: quasi alla fine del link (es. 90% della larghezza del link)
+      let arrowLeft = linkRect.left + linkWidth * 0.9 - left;
+
+      // Limita arrowLeft a rientrare nel popup
+      const arrowMargin = 16; // margine da sinistra/destra per non far uscire la freccia
+      if (arrowLeft > popupWidth - arrowMargin) arrowLeft = popupWidth - arrowMargin;
+      if (arrowLeft < arrowMargin) arrowLeft = arrowMargin;
+
+      // Imposta la variabile CSS
+      popup.style.setProperty('--arrow-left', `${arrowLeft}px`);
+
+      // Posiziona il popup
+      popup.style.left = `${left + window.scrollX}px`;
+      popup.style.top = `${top}px`;
     });
+
+    link.addEventListener('mouseleave', () => {
+      popup.style.display = 'none';
+      popup.innerHTML = '';
+      popup.classList.remove('arrow-up', 'arrow-down');
+    });
+  });
 });

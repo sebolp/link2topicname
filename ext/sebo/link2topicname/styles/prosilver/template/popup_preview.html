@@ -3,18 +3,18 @@
  <div class="l2t-popup-content" style="display: flex; gap: 1rem; align-items: flex-start;">
     {% if TPL_VIEW_AVATAR %}
         <div class="l2t-left" style="text-align: center;">
-            {% if USER_AVATAR %}
-                {{ USER_AVATAR }}
+            {% if L2T_USER_AVATAR %}
+                {{ L2T_USER_AVATAR }}
             {% endif %}
 
-            {% if USER_RANK_TITLE or RANK_IMG_SRC %}
-                <div class="profile-rank" style="margin-top: 0.5rem;">
-                    {{ USER_RANK_TITLE }}
-                    {% if USER_RANK_TITLE and RANK_IMG_SRC %}
+            {% if L2T_USER_RANK_TITLE or L2T_RANK_IMG_SRC %}
+                <div class="profile-rank" style="margin-top: 0.5rem; font-size:0.7em;color:#8f8f8f;">
+                        {{ L2T_USER_RANK_TITLE }}
+                    {% if L2T_USER_RANK_TITLE and L2T_RANK_IMG_SRC %}
                         <br />
                     {% endif %}
-                    {% if RANK_IMG_SRC %}
-                        <img src="{{ RANK_IMG_SRC }}" alt="{{ RANK_IMG_ALT|e }}" />
+                    {% if L2T_RANK_IMG_SRC %}
+                        <img src="{{ L2T_RANK_IMG_SRC }}" alt="{{ L2T_RANK_IMG_ALT|e }}" />
                     {% endif %}
                 </div>
             {% endif %}
@@ -22,23 +22,24 @@
     {% endif %}
 
     <div class="l2t-right">
-        <p class="l2t-popup-text" style="margin: 0;">
-            {% if POST_SUBJECT and POST_SUBJECT != TOPIC_TITLE %}
-                {{ POST_SUBJECT }} in <strong>{{ TOPIC_TITLE }}</strong>
+        <p class="l2t-popup-text" style="margin: 0;font-size:0.8em;">
+            <span style="color:#8f8f8f;">
+            {% if L2T_POST_SUBJECT and L2T_POST_SUBJECT != L2T_TOPIC_TITLE %}
+                {{ L2T_POST_SUBJECT }} in <strong>{{ L2T_TOPIC_TITLE }}</strong>
             {% else %}
-                <strong>{{ TOPIC_TITLE }}</strong>
+                <strong>{{ L2T_TOPIC_TITLE }}</strong>
             {% endif %}
             
-            {% if TPL_VIEW_FORUM and FORUM_NAME %}
-                <small><em>{{ FORUM_NAME }}</em></small>
+            {% if TPL_VIEW_FORUM and L2T_FORUM_NAME %}
+                <small><em>{{ L2T_FORUM_NAME }}</em></small>
             {% endif %}
-
-            {% if TPL_VIEW_USERNAME and USERNAME %}
-                <br>di <span style="color:#{{ USER_COLOUR }}">{{ USERNAME }}</span> {{ USER_RANK }}
+            </span>
+            {% if TPL_VIEW_USERNAME and L2T_USERNAME %}
+                <br><span style="color:#8f8f8f;">di</span> <span {% if L2T_USER_COLOUR %}style="color:#{{ L2T_USER_COLOUR }}"{% endif %}>{{ L2T_USERNAME }}</span> {{ L2T_USER_RANK }}
             {% endif %}
             
-            {% if TPL_VIEW_TEXT and POST_EXCERPT %}
-                <br><small>{{ POST_EXCERPT }}</small>
+            {% if TPL_VIEW_TEXT and L2T_POST_EXCERPT %}
+                <br><span style="font-family:Lucida Grande, Trebuchet MS, Verdana, Helvetica, Arial, sans-serif; font-size:1.2em; line-height:1.4em;">{{ L2T_POST_EXCERPT }}</span>
             {% endif %}
         </p>
     </div>

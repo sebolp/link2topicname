@@ -1,17 +1,11 @@
-<a href="{{ HREF }}" class="l2t-link" data-popup-id="{{ POPUP_ID }}">
+<a href="{{ L2T_HREF }}" class="l2t-link" data-popup="{{ L2T_POPUP_HTML|e('html_attr') }}">
   <span class="icon-stack">
     <i class="fa fa-square bg"></i>
     <i class="fa fa-link fg fa-inverse"></i>
   </span>
-  {% if POST_SUBJECT is defined and POST_SUBJECT and POST_SUBJECT != TOPIC_TITLE %}
-    {{ POST_SUBJECT|e }} in <strong>{{ TOPIC_TITLE|e }}</strong>
+  {% if L2T_POST_SUBJECT is defined and L2T_POST_SUBJECT and L2T_POST_SUBJECT != L2T_TOPIC_TITLE %}
+    {{ L2T_POST_SUBJECT|e }} in <strong>{{ L2T_TOPIC_TITLE|e }}</strong>
   {% else %}
-    <strong>{{ TOPIC_TITLE|e }}</strong>
+    <strong>{{ L2T_TOPIC_TITLE|e }}</strong>
   {% endif %}
 </a>
-
-{% if TPL_VIEW_POPUP %}
-  <div id="{{ POPUP_ID }}" class="l2t-hidden-popup" style="display: none;">
-    {{ POPUP_HTML|raw }}
-  </div>
-{% endif %}

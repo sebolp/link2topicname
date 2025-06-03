@@ -124,8 +124,9 @@
 				'rank_img_alt' => '',
 			];
 
+			// i get RANK
 			$user_rank_id = (int) $user_row['user_rank'];
-			if ($user_rank_id)
+			if ($user_rank_id > 0)
 			{
 				$data_rank = [
 					'rank_id' => (int) $user_rank_id,
@@ -141,6 +142,32 @@
 				if ($rank_row)
 				{
 					$user_info['rank_title'] = $rank_row['rank_title'];
+					if (!empty($rank_row['rank_image']))
+					{
+						$user_info['rank_img_src'] = $this->phpbb_root_path . 'images/ranks/' . $rank_row['rank_image'];
+						$user_info['rank_img_alt'] = $rank_row['rank_title'];
+					}
+				}
+			}
+
+			// or RANK_NOT_SPECIAL
+			else
+			{
+				$rank_search = [
+					'rank_special' => 0,
+				];
+
+				$sql_rank = 'SELECT rank_title, rank_min, rank_image, rank_special
+				FROM ' . RANKS_TABLE . '
+				WHERE ' . $this->db->sql_build_array('SELECT', $rank_search);
+				$result_rank = $this->db->sql_query($sql_rank);
+				$rank_row = $this->db->sql_fetchrow($result_rank);
+				$this->db->sql_freeresult($result_rank);
+
+				if (!empty($rank_row) && isset($rank_row['rank_min'], $user_row['user_posts']) && $rank_row['rank_min'] < $user_row['user_posts'])
+				{
+					$user_info['rank_title'] = $rank_row['rank_title'];
+					
 					if (!empty($rank_row['rank_image']))
 					{
 						$user_info['rank_img_src'] = $this->phpbb_root_path . 'images/ranks/' . $rank_row['rank_image'];
@@ -195,7 +222,7 @@
 				'topic_id' => (int) $topic_id,
 			];
 
-			$sql = 'SELECT topic_title, forum_id, topic_poster
+			$sql = 'SELECT topic_first_post_id, topic_title
 			FROM ' . TOPICS_TABLE . '
 			WHERE ' . $this->db->sql_build_array('SELECT', $data);
 			$result = $this->db->sql_query($sql);
@@ -207,12 +234,9 @@
 				return null;
 			}
 
-			$user_info = $this->get_user_info((int) $row['topic_poster']);
-
 			return [
-				'topic_title' => $row['topic_title'],
-				'forum_id' => (int) $row['forum_id'],
-				'user_info' => $user_info,
+				'topic_first_post_id' => (int) $row['topic_first_post_id'],
+				'topic_title'         => $row['topic_title'],
 			];
 		}
 
@@ -302,34 +326,36 @@
 						$forum_id = $post_info['forum_id'];
 						$topic_id = $post_info['topic_id'];
 						$user_info = $post_info['user_info'];
+						$topic_title = ($this->get_topic_info($post_info['topic_id'])['topic_title'] ?? '');
 
 					}
 
-					if ($type === 't' || $topic_id)
+					if ($type === 't')
 					{
-						$topic_info = $this->get_topic_info($type === 't' ? $id : $topic_id);
+						$topic_info = $this->get_topic_info($id);
 						if (!$topic_info)
 						{
 							continue;
 						}
-
+						else if ($topic_info)
+						{
+							$post_info = $this->get_post_info($topic_info['topic_first_post_id']);
+						}
+						
+						$post_subject = $post_info['post_subject'];
+						$post_excerpt = $post_info['post_excerpt'];
+						$forum_id = $post_info['forum_id'];
+						$topic_id = $post_info['topic_id'];
+						$user_info = $post_info['user_info'];
 						$topic_title = $topic_info['topic_title'];
-						if (!$forum_id)
-						{
-							$forum_id = $topic_info['forum_id'];
-						}
 
-						if (empty($username))
-						{
-							$user_info = $topic_info['user_info'];
-						}
 					}
 
 					// Forum name
 					if ($forum_id)
 					{
 						$data_f = [
-							'forum_id' => (int) $id,
+							'forum_id' => (int) $forum_id,
 						];
 						$sql = 'SELECT forum_name
 						FROM ' . FORUMS_TABLE . '
@@ -353,16 +379,16 @@
 					];
 
 					$popup_vars = array_merge($template_vars_settings, [
-					'POST_SUBJECT'   => $post_subject,
-					'POST_EXCERPT'   => $post_excerpt ?? '',
-					'TOPIC_TITLE'    => $topic_title,
-					'FORUM_NAME'     => $forum_name,
-					'USER_AVATAR'    => $user_info['user_avatar'],
-					'USER_COLOUR'    => $user_info['user_colour'],
-					'USERNAME'       => $user_info['username'],
-					'USER_RANK_TITLE'=> $user_info['rank_title'],
-					'RANK_IMG_SRC'   => $user_info['rank_img_src'],
-					'RANK_IMG_ALT'   => $user_info['rank_img_alt'],
+					'L2T_POST_SUBJECT'   => $post_subject,
+					'L2T_POST_EXCERPT'   => $post_excerpt,
+					'L2T_TOPIC_TITLE'    => $topic_title,
+					'L2T_FORUM_NAME'     => $forum_name,
+					'L2T_USER_AVATAR'    => $user_info['user_avatar'],
+					'L2T_USER_COLOUR'    => $user_info['user_colour'],
+					'L2T_USERNAME'       => $user_info['username'],
+					'L2T_USER_RANK_TITLE'=> $user_info['rank_title'],
+					'L2T_RANK_IMG_SRC'   => $user_info['rank_img_src'],
+					'L2T_RANK_IMG_ALT'   => $user_info['rank_img_alt'],
 					]);
 
 					global $phpbb_container;
@@ -371,12 +397,11 @@
 					$popup_html = $twig->render('@sebo_link2topicname/popup_preview.html', $popup_vars);
 
 					$replacement_data = [
-					'HREF'          => $full_url,
-					'POPUP_ID'      => 'popup-' . $type . '-' . $id,
-					'POST_SUBJECT'  => $post_subject,
-					'TOPIC_TITLE'   => $topic_title,
+					'L2T_HREF'          => $full_url,
+					'L2T_POST_SUBJECT'  => $post_subject,
+					'L2T_TOPIC_TITLE'   => $topic_title,
 					'TPL_VIEW_POPUP'=> $this->settings['view_popup'],
-					'POPUP_HTML'    => $popup_html,
+					'L2T_POPUP_HTML'    => $popup_html,
 					];
 
 					$link_html = $twig->render('@sebo_link2topicname/edit_message_template.html', $replacement_data);
