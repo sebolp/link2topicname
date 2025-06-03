@@ -167,7 +167,7 @@
 				if (!empty($rank_row) && isset($rank_row['rank_min'], $user_row['user_posts']) && $rank_row['rank_min'] < $user_row['user_posts'])
 				{
 					$user_info['rank_title'] = $rank_row['rank_title'];
-					
+
 					if (!empty($rank_row['rank_image']))
 					{
 						$user_info['rank_img_src'] = $this->phpbb_root_path . 'images/ranks/' . $rank_row['rank_image'];
@@ -341,7 +341,7 @@
 						{
 							$post_info = $this->get_post_info($topic_info['topic_first_post_id']);
 						}
-						
+
 						$post_subject = $post_info['post_subject'];
 						$post_excerpt = $post_info['post_excerpt'];
 						$forum_id = $post_info['forum_id'];
