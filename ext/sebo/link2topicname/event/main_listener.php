@@ -12,8 +12,6 @@
 
 	use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-	use phpbb\textformatter\s9e\utils;
-
 	class main_listener implements EventSubscriberInterface
 	{
 		public static function getSubscribedEvents()
@@ -191,7 +189,8 @@
 			preg_match_all('/\[(.*?)\]/', $text, $matches);
 
 			$char_count = 0;
-			foreach ($matches[1] as $content_inside) {
+			foreach ($matches[1] as $content_inside)
+			{
 				$full_text = '[' . $content_inside . ']';
 				$char_count += strlen($full_text);
 			}
@@ -417,7 +416,7 @@
 							$forum_name = $row['forum_name'];
 						}
 					}
-					
+
 					// Date format
 					$data_f = [
 							'config_name' => 'default_dateformat',

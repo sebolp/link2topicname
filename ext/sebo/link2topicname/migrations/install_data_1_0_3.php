@@ -14,8 +14,8 @@ class install_data_1_0_3 extends \phpbb\db\migration\migration
 	public static function depends_on()
 	{
 		return [
-        '\sebo\link2topicname\migrations\install_data',
-        '\sebo\link2topicname\migrations\install_schema_1_0_3',
+		'\sebo\link2topicname\migrations\install_data',
+		'\sebo\link2topicname\migrations\install_schema_1_0_3',
 		];
 	}
 
@@ -29,8 +29,8 @@ class install_data_1_0_3 extends \phpbb\db\migration\migration
 	public function table_l2t_install_1_0_3()
 	{
 		$l2t_table_settings = $this->table_prefix . 'sebo_l2t_settings';
-		if ($this->db_tools->sql_table_exists($l2t_table_settings) &&
-            $this->db_tools->sql_column_exists($l2t_table_settings, 'text_formatted')) {
+		if ($this->db_tools->sql_table_exists($l2t_table_settings) && $this->db_tools->sql_column_exists($l2t_table_settings, 'text_formatted'))
+			{
 			$data_1_0_3 = [
 				['text_formatted' => 1],
 			];

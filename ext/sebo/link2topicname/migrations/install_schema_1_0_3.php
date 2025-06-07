@@ -17,7 +17,8 @@
 		{
 			$l2tn_table = $this->table_prefix . 'sebo_l2t_settings';
 
-			if (!$this->db_tools->sql_table_exists($l2tn_table)) {
+			if (!$this->db_tools->sql_table_exists($l2tn_table))
+			{
 				return false;
 			}
 			return $this->db_tools->sql_column_exists($l2tn_table, 'text_formatted');
