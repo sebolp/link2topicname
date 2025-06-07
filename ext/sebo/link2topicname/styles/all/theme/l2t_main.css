@@ -2,14 +2,11 @@
   position: absolute;
   display: none;
   max-width: 450px;
-  background: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1em;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   z-index: 9999;
-  font-size: 14px;
-  color: #333;
   overflow-wrap: break-word;  /* spezza parole troppo lunghe */
   word-wrap: break-word;      /* compatibilità */
   white-space: normal;        /* fa andare a capo */
@@ -37,7 +34,6 @@
   top: 100%;    /* per arrow-down */
   left: var(--arrow-left, 20px); /* posizione dinamica */
   border: 8px solid transparent;
-  filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.1));
 }
 
 .l2t-popup-global.arrow-up::before {
@@ -69,9 +65,20 @@
 }
 
 .icon-stack .fg {
-    font-size: 0.7em; /* o quanto ti serve */
+    font-size: 0.7em;
     position: absolute;
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.icon-stack .custom-ban {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1.7em; /* simile a fa-stack-2x */
+  transform: translate(-45%, -45%);
+  color: red;
+  pointer-events: none; /* per non interferire con click */
+  z-index: 5; /* sopra bg e fg */
 }

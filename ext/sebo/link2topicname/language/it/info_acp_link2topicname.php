@@ -48,11 +48,13 @@ $lang = array_merge($lang, [
 	'ACP_LINK2TOPICNAME_VIEW_FORUM' => 'Vuoi visualizzare il forum di provenienza?',
 	'ACP_LINK2TOPICNAME_VIEW_USERNAME' => 'Vuoi visualizzare l\'autore del messaggio?',
 
-	'LOG_ACP_LINK2TOPICNAME_SETTINGS'		=> '<strong>Impostazioni LINK2TOPICNAME aggiornate</strong>',
-
 	'L2TN_UPDATED'						=> 'Impostazioni aggiornate',
 	'L2TN_NOT_UPDATED'					=> 'Impostazioni non aggiornate',
 
 	'LOG_ACP_LINK2TOPICNAME_SETTINGS' => 'Impostazioni LINK2TOPICNAME aggiornate',
 	'RETURN_ACP' => 'Torna indietro al <a href="%s">pannello di controllo</a>',
+	
+	/* >=1_0_3 */
+	'ACP_LINK2TOPICNAME_VIEW_BBCODE' => 'Vuoi visualizzare bbcodes, "magic_urls" e smilies nel popups?',
+
 ]);

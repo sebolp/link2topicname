@@ -53,5 +53,8 @@ $lang = array_merge($lang, [
 
 	'LOG_ACP_LINK2TOPICNAME_SETTINGS' => 'LINK2TOPICNAME settings updated',
 	'RETURN_ACP' => 'Return to the <a href="%s">Control Panel</a>',
+	
+	/* >=1_0_3 */
+	'ACP_LINK2TOPICNAME_VIEW_BBCODE' => 'Do you want to enable bbcodes, "magic_urls" and smilies in popups?',
 
 ]);

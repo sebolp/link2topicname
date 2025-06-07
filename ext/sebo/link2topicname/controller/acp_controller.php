@@ -76,12 +76,13 @@ class acp_controller
 		$this->db->sql_freeresult($result);
 
 		$template_vars_settings = [
-			'tpl_view_username' => (bool) $settings['view_username'],
-			'tpl_view_avatar'   => (bool) $settings['view_avatar'],
-			'tpl_view_forum'    => (bool) $settings['view_forum'],
-			'tpl_view_popup'    => (bool) $settings['view_popup'],
-			'tpl_view_text'     => (bool) $settings['view_text'],
-			'tpl_car_length'    => (int) $settings['car_length'],
+			'TPL_VIEW_USERNAME' => (bool) $settings['view_username'],
+			'TPL_VIEW_AVATAR'   => (bool) $settings['view_avatar'],
+			'TPL_VIEW_FORUM'    => (bool) $settings['view_forum'],
+			'TPL_VIEW_POPUP'    => (bool) $settings['view_popup'],
+			'TPL_VIEW_TEXT'     => (bool) $settings['view_text'],
+			'TPL_VIEW_BBCODE'     => (bool) $settings['text_formatted'],
+			'TPL_CAR_LENGTH'    => (int) $settings['car_length'],
 		];
 
 		$this->template->assign_vars($template_vars_settings);
@@ -104,6 +105,7 @@ class acp_controller
 				$view_popup    = (int) $this->request->variable('view_popup', 1);
 				$view_text     = (int) $this->request->variable('view_text', 1);
 				$view_avatar   = (int) $this->request->variable('view_avatar', 1);
+				$view_bbcode   = (int) $this->request->variable('view_bbcode', 1);
 				$car_length    = (int) $this->request->variable('car_length', 120);
 
 				$sql = 'UPDATE `' . $this->table_prefix . 'sebo_l2t_settings`
@@ -112,6 +114,7 @@ class acp_controller
 						`view_popup` = ' . $view_popup . ',
 						`view_text` = ' . $view_text . ',
 						`view_avatar` = ' . $view_avatar . ',
+						`text_formatted` = ' . $view_bbcode . ',
 						`car_length` = ' . $car_length;
 
 				$this->db->sql_query($sql);

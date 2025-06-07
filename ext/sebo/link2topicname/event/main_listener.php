@@ -12,6 +12,8 @@
 
 	use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+	use phpbb\textformatter\s9e\utils;
+
 	class main_listener implements EventSubscriberInterface
 	{
 		public static function getSubscribedEvents()
@@ -78,6 +80,7 @@
 				'view_forum'     => (bool) $row['view_forum'],
 				'view_popup'     => (bool) $row['view_popup'],
 				'view_text'      => (bool) $row['view_text'],
+				'view_bbcode'    => (bool) $row['text_formatted']
 				];
 			}
 		}
@@ -119,6 +122,9 @@
 				'username' => $user_row['username'],
 				'user_colour' => $user_row['user_colour'],
 				'user_avatar' => phpbb_get_user_avatar($user_row),
+				'user_posts' => $user_row['user_posts'],
+				'user_regdate' => $user_row['user_regdate'],
+				'user_avatar_w' => max(100, min($user_row['user_avatar_width'], 120)),
 				'rank_title' => '',
 				'rank_img_src' => '',
 				'rank_img_alt' => '',
@@ -179,15 +185,30 @@
 			return $user_info;
 		}
 
+		protected function get_word_bbcode_count($text)
+		{
+			// avoid too short for bbcode tags
+			preg_match_all('/\[(.*?)\]/', $text, $matches);
+
+			$char_count = 0;
+			foreach ($matches[1] as $content_inside) {
+				$full_text = '[' . $content_inside . ']';
+				$char_count += strlen($full_text);
+			}
+
+			return $char_count;
+		}
+
 		protected function get_post_info(int $post_id): ?array
 		{
 			$data = [
 				'post_id' => (int) $post_id,
 			];
 
-			$sql = 'SELECT post_subject, forum_id, topic_id, poster_id, post_text
-			FROM ' . POSTS_TABLE . '
-			WHERE ' . $this->db->sql_build_array('SELECT', $data);
+			$sql = 'SELECT post_subject, forum_id, topic_id, poster_id, post_text, bbcode_uid, bbcode_bitfield,
+	        enable_bbcode, enable_smilies, enable_magic_url
+	        FROM ' . POSTS_TABLE . '
+	        WHERE ' . $this->db->sql_build_array('SELECT', $data);
 			$result = $this->db->sql_query($sql);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -197,8 +218,27 @@
 				return null;
 			}
 
-			$post_excerpt = html_entity_decode(strip_tags($row['post_text']));
-			$max_length = $this->settings['car_length'] ?? 120;
+			// case1 full options
+			// bbcode and smilies applies
+			if ($this->settings['view_bbcode'] == 1)
+			{
+			$bbcode_options =
+				(($row['enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) +
+				(($row['enable_smilies']) ? OPTION_FLAG_SMILIES : 0) +
+				(($row['enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
+
+			$post_excerpt = generate_text_for_display($row['post_text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $bbcode_options);
+			}
+			else if ($this->settings['view_bbcode'] == 0)
+			{
+			// case2 nothing applied
+			$post_excerpt = generate_text_for_edit($row['post_text'], $row['bbcode_uid'], $bbcode_options);
+			$post_excerpt = $post_excerpt['text'];
+			}
+
+			// cut it
+			$counter_add = $this->get_word_bbcode_count($post_excerpt);
+			$max_length = $this->settings['car_length'] + $counter_add ?? 120;
 
 			if ($max_length > 0 && mb_strlen($post_excerpt) > $max_length)
 			{
@@ -246,17 +286,29 @@
 			$message = $post_row['MESSAGE'];
 			$board_url = generate_board_url();
 
-			$pattern = '~<a[^>]+href="(' . preg_quote($board_url, '~') . '[^"]*?)"[^>]*>(.*?)</a>~i';
+			$parsed_board_url = parse_url($board_url);
+			$host = preg_quote(preg_replace('~^www\.~i', '', $parsed_board_url['host']), '~');
+			$base_path = preg_quote($parsed_board_url['path'] ?? '', '~'); // es: "/forum" oppure ""
+
+			$pattern = '~<a[^>]+href="https?://(?:www\.)?' . $host . $base_path . '/(viewtopic|viewforum)\.php\?([^"#]*)(#[^"]*)?"[^>]*>(.*?)</a>~i';
 
 			if (preg_match_all($pattern, $message, $matches, PREG_SET_ORDER))
 			{
 				foreach ($matches as $match)
 				{
-					$full_url = $match[1];
-					$link_text = $match[2];
+					$script = $match[1];
+					$query_str = $match[2];
+					$anchor = isset($match[3]) ? ltrim($match[3], '#') : '';
+					$link_text = $match[4];
 
-					$url_parts = parse_url($full_url);
-					parse_str($url_parts['query'] ?? '', $params);
+					$full_url = 'https://' . $parsed_board_url['host'] . $base_path . '/' . $script . '.php?' . $query_str;
+					if ($anchor)
+					{
+						$full_url .= '#' . $anchor;
+					}
+					$full_url = html_entity_decode($full_url);
+
+					parse_str($query_str, $params);
 
 					$type = '';
 					$id = 0;
@@ -265,14 +317,14 @@
 					{
 						$type = 'p';
 						$id = (int) $params['p'];
-						}
-						else if (isset($params['t']))
-						{
+					}
+					else if (isset($params['t']))
+					{
 						$type = 't';
 						$id = (int) $params['t'];
-						}
-						else if (isset($params['f']))
-						{
+					}
+					else if (isset($params['f']))
+					{
 						$type = 'f';
 						$id = (int) $params['f'];
 					}
@@ -316,17 +368,13 @@
 					if ($type === 'p')
 					{
 					$post_info = $this->get_post_info($id);
-						if (!$post_info)
-						{
-							continue;
-						}
 
-						$post_subject = $post_info['post_subject'];
-						$post_excerpt = $post_info['post_excerpt'];
-						$forum_id = $post_info['forum_id'];
-						$topic_id = $post_info['topic_id'];
-						$user_info = $post_info['user_info'];
-						$topic_title = ($this->get_topic_info($post_info['topic_id'])['topic_title'] ?? '');
+					$post_subject = $post_info['post_subject'] ?? '';
+					$post_excerpt = $post_info['post_excerpt'] ?? '';
+					$forum_id = $post_info['forum_id'] ?? 0;
+					$topic_id = $post_info['topic_id'] ?? 0;
+					$user_info = $post_info['user_info'] ?? [];
+					$topic_title = $this->get_topic_info($topic_id)['topic_title'] ?? '';
 
 					}
 
@@ -369,6 +417,22 @@
 							$forum_name = $row['forum_name'];
 						}
 					}
+					
+					// Date format
+					$data_f = [
+							'config_name' => 'default_dateformat',
+						];
+					$sql = 'SELECT config_value
+					FROM ' . CONFIG_TABLE . '
+					WHERE ' . $this->db->sql_build_array('SELECT', $data_f);
+					$result = $this->db->sql_query($sql);
+					$row = $this->db->sql_fetchrow($result);
+					$this->db->sql_freeresult($result);
+
+					if ($row)
+					{
+						$l2t_date_format = str_replace("|", "", $row['config_value']);
+					}
 
 					$template_vars_settings = [
 					'TPL_VIEW_USERNAME' => $this->settings['view_username'],
@@ -379,16 +443,19 @@
 					];
 
 					$popup_vars = array_merge($template_vars_settings, [
-					'L2T_POST_SUBJECT'   => $post_subject,
-					'L2T_POST_EXCERPT'   => $post_excerpt,
-					'L2T_TOPIC_TITLE'    => $topic_title,
-					'L2T_FORUM_NAME'     => $forum_name,
-					'L2T_USER_AVATAR'    => $user_info['user_avatar'],
-					'L2T_USER_COLOUR'    => $user_info['user_colour'],
-					'L2T_USERNAME'       => $user_info['username'],
-					'L2T_USER_RANK_TITLE'=> $user_info['rank_title'],
-					'L2T_RANK_IMG_SRC'   => $user_info['rank_img_src'],
-					'L2T_RANK_IMG_ALT'   => $user_info['rank_img_alt'],
+					'L2T_POST_SUBJECT'   => $post_subject ?? '',
+					'L2T_POST_EXCERPT'   => $post_excerpt ?? '',
+					'L2T_TOPIC_TITLE'    => $topic_title ?? '',
+					'L2T_FORUM_NAME'     => $forum_name ?? '',
+					'L2T_USER_AVATAR'    => $user_info['user_avatar'] ?? '',
+					'L2T_USER_AVATAR_W'  =>	$user_info['user_avatar_w'] ?? '',
+					'L2T_USER_POSTS'    => $user_info['user_posts'] ?? '',
+					'L2T_USER_REGDATE'  => isset($user_info['user_regdate']) ? date($l2t_date_format, $user_info['user_regdate']) : '',
+					'L2T_USER_COLOUR'    => $user_info['user_colour'] ?? '',
+					'L2T_USERNAME'       => $user_info['username'] ?? '',
+					'L2T_USER_RANK_TITLE'=> $user_info['rank_title'] ?? '',
+					'L2T_RANK_IMG_SRC'   => $user_info['rank_img_src'] ?? '',
+					'L2T_RANK_IMG_ALT'   => $user_info['rank_img_alt'] ?? '',
 					]);
 
 					global $phpbb_container;
@@ -402,6 +469,7 @@
 					'L2T_TOPIC_TITLE'   => $topic_title,
 					'TPL_VIEW_POPUP'=> $this->settings['view_popup'],
 					'L2T_POPUP_HTML'    => $popup_html,
+					'TPL_POST_FOUND' => (bool) $post_info
 					];
 
 					$link_html = $twig->render('@sebo_link2topicname/edit_message_template.html', $replacement_data);

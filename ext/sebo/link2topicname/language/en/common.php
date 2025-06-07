@@ -19,5 +19,7 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-
+	/* >=1_0_3 */
+	'L2T_ALERT_NO_LINK' => 'OOOOPS, something wrong',
+	'L2T_ALERT_NO_LINK_EXPLAIN' => 'the linked post does not exist!',
 ]);

@@ -19,5 +19,7 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-
+	/* >=1_0_3 */
+	'L2T_ALERT_NO_LINK' => 'Attenzione',
+	'L2T_ALERT_NO_LINK_EXPLAIN' => 'l\'argomento di questo link non esiste!',
 ]);

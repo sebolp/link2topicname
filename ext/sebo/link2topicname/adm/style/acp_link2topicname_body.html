@@ -36,11 +36,11 @@
 			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_ENABLE_POPUP_REQ') ~ lang('COLON') }}</strong></dt>
 			<dd>
 				<label for="view_popup_1">
-					<input type="radio" class="radio" name="view_popup" id="view_popup_1" value="1" {% if tpl_view_popup %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_popup" id="view_popup_1" value="1" {% if TPL_VIEW_POPUP %}checked="checked"{% endif %} />
 					{{ lang('YES') }}
 				</label>
 				<label for="view_popup_0">
-					<input type="radio" class="radio" name="view_popup" id="view_popup_0" value="0" {% if not tpl_view_popup %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_popup" id="view_popup_0" value="0" {% if not TPL_VIEW_POPUP %}checked="checked"{% endif %} />
 					{{ lang('NO') }}
 				</label>
 			</dd>
@@ -54,11 +54,11 @@
 			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_USERNAME') }}</strong></dt>
 			<dd>
 				<label for="view_username_1">
-					<input type="radio" class="radio" name="view_username" id="view_username_1" value="1" {% if tpl_view_username %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_username" id="view_username_1" value="1" {% if TPL_VIEW_USERNAME %}checked="checked"{% endif %} />
 					{{ lang('YES') }}
 				</label>
 				<label for="view_username_0">
-					<input type="radio" class="radio" name="view_username" id="view_username_0" value="0" {% if not tpl_view_username %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_username" id="view_username_0" value="0" {% if not TPL_VIEW_USERNAME %}checked="checked"{% endif %} />
 					{{ lang('NO') }}
 				</label>
 			</dd>
@@ -68,11 +68,11 @@
 			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_FORUM') }}</strong></dt>
 			<dd>
 				<label for="view_forum_1">
-					<input type="radio" class="radio" name="view_forum" id="view_forum_1" value="1" {% if tpl_view_forum %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_forum" id="view_forum_1" value="1" {% if TPL_VIEW_FORUM %}checked="checked"{% endif %} />
 					{{ lang('YES') }}
 				</label>
 				<label for="view_forum_0">
-					<input type="radio" class="radio" name="view_forum" id="view_forum_0" value="0" {% if not tpl_view_forum %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_forum" id="view_forum_0" value="0" {% if not TPL_VIEW_FORUM %}checked="checked"{% endif %} />
 					{{ lang('NO') }}
 				</label>
 			</dd>
@@ -82,11 +82,11 @@
 			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_AVATAR') }}</strong></dt>
 			<dd>
 				<label for="view_avatar_1">
-					<input type="radio" class="radio" name="view_avatar" id="view_avatar_1" value="1" {% if tpl_view_avatar %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_avatar" id="view_avatar_1" value="1" {% if TPL_VIEW_AVATAR %}checked="checked"{% endif %} />
 					{{ lang('YES') }}
 				</label>
 				<label for="view_avatar_0">
-					<input type="radio" class="radio" name="view_avatar" id="view_avatar_0" value="0" {% if not tpl_view_avatar %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_avatar" id="view_avatar_0" value="0" {% if not TPL_VIEW_AVATAR %}checked="checked"{% endif %} />
 					{{ lang('NO') }}
 				</label>
 			</dd>
@@ -96,11 +96,25 @@
 			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_TEXT') }}</strong></dt>
 			<dd>
 				<label for="view_text_1">
-					<input type="radio" class="radio" name="view_text" id="view_text_1" value="1" {% if tpl_view_text %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_text" id="view_text_1" value="1" {% if TPL_VIEW_TEXT %}checked="checked"{% endif %} />
 					{{ lang('YES') }}
 				</label>
 				<label for="view_text_0">
-					<input type="radio" class="radio" name="view_text" id="view_text_0" value="0" {% if not tpl_view_text %}checked="checked"{% endif %} />
+					<input type="radio" class="radio" name="view_text" id="view_text_0" value="0" {% if not TPL_VIEW_TEXT %}checked="checked"{% endif %} />
+					{{ lang('NO') }}
+				</label>
+			</dd>
+		</dl>
+		
+		<dl>
+			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_BBCODE') }}</strong></dt>
+			<dd>
+				<label for="view_bbcode_1">
+					<input type="radio" class="radio" name="view_bbcode" id="view_bbcode_1" value="1" {% if TPL_VIEW_BBCODE %}checked="checked"{% endif %} />
+					{{ lang('YES') }}
+				</label>
+				<label for="view_bbcode_0">
+					<input type="radio" class="radio" name="view_bbcode" id="view_bbcode_0" value="0" {% if not TPL_VIEW_BBCODE %}checked="checked"{% endif %} />
 					{{ lang('NO') }}
 				</label>
 			</dd>
@@ -109,7 +123,7 @@
 		<dl>
 			<dt><label for="car_length"><strong>{{ lang('ACP_LINK2TOPICNAME_CAR_LENGTH') ~ lang('COLON') }}</strong></label></dt>
 			<dd>
-				<input type="text" name="car_length" id="car_length" value="{{ tpl_car_length }}" />
+				<input type="text" name="car_length" id="car_length" value="{{ TPL_CAR_LENGTH }}" />
 			</dd>
 		</dl>
 	</fieldset>
