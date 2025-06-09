@@ -5,7 +5,7 @@
     <i class="fa fa-link fg fa-inverse"></i>
   </span>
   {% if L2T_POST_SUBJECT is defined and L2T_POST_SUBJECT and L2T_POST_SUBJECT != L2T_TOPIC_TITLE %}
-    {{ L2T_POST_SUBJECT|e }} in <strong>{{ L2T_TOPIC_TITLE|e }}</strong>
+    {{ L2T_POST_SUBJECT }} in <strong>{{ L2T_TOPIC_TITLE }}</strong>
   {% else %}
     <strong>{{ L2T_TOPIC_TITLE|e }}</strong>
   {% endif %}

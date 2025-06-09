@@ -221,27 +221,34 @@
 			// bbcode and smilies applies
 			if ($this->settings['view_bbcode'] == 1)
 			{
-			$bbcode_options =
-				(($row['enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) +
-				(($row['enable_smilies']) ? OPTION_FLAG_SMILIES : 0) +
-				(($row['enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
+				$bbcode_options =
+					(($row['enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) +
+					(($row['enable_smilies']) ? OPTION_FLAG_SMILIES : 0) +
+					(($row['enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
 
-			$post_excerpt = generate_text_for_display($row['post_text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $bbcode_options);
+				$post_excerpt = generate_text_for_display($row['post_text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $bbcode_options);
 			}
 			else if ($this->settings['view_bbcode'] == 0)
 			{
-			// case2 nothing applied
-			$post_excerpt = generate_text_for_edit($row['post_text'], $row['bbcode_uid'], $bbcode_options);
-			$post_excerpt = $post_excerpt['text'];
+				// case2 nothing applied
+				$post_excerpt = generate_text_for_edit($row['post_text'], $row['bbcode_uid'], 0);
+				$post_excerpt = $post_excerpt['text'];
 			}
 
 			// cut it
 			$counter_add = $this->get_word_bbcode_count($post_excerpt);
 			$max_length = $this->settings['car_length'] + $counter_add ?? 120;
 
-			if ($max_length > 0 && mb_strlen($post_excerpt) > $max_length)
-			{
-				$post_excerpt = mb_substr($post_excerpt, 0, $max_length) . '...';
+			if ($max_length > 0 && mb_strlen($post_excerpt) > $max_length) {
+				$truncated = mb_substr($post_excerpt, 0, $max_length);
+
+				$last_space = mb_strrpos($truncated, ' ');
+
+				if ($last_space !== false) {
+					$truncated = mb_substr($truncated, 0, $last_space);
+				}
+
+				$post_excerpt = $truncated . '...';
 			}
 
 			$user_info = $this->get_user_info((int) $row['poster_id']);

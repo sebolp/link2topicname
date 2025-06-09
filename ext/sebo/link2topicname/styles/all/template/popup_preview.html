@@ -1,27 +1,29 @@
 <!-- INCLUDECSS @sebo_link2topicname/l2t_main.css -->
 <!-- INCLUDEJS @sebo_link2topicname/view_popup.js -->
 <div class="l2t-popup-content" style="display: flex; gap: 1rem; align-items: flex-start;">
+    {% if TPL_VIEW_USERNAME or TPL_VIEW_AVATAR %}
     <div class="l2t-left" style="min-width: {{ L2T_USER_AVATAR_W }}px;">
         <dl>
             <dt class="{% if L2T_USER_RANK_TITLE or L2T_RANK_IMG_SRC %}has-profile-rank{% else %}no-profile-rank{% endif %} {% if TPL_VIEW_AVATAR %}{% if L2T_USER_AVATAR %}has-avatar{% else %}no-avatar{% endif %}{% endif %}">
-				{% if TPL_VIEW_AVATAR %}
-                    {% if L2T_USER_AVATAR %}
-                    <div class="avatar-container">
-                        <a class="avatar">{{ L2T_USER_AVATAR }}</a>
-                    </div>
-                    {% endif %}
+				{% if TPL_VIEW_AVATAR and L2T_USER_AVATAR %}
+                <div class="avatar-container">
+                    <a class="avatar">{{ L2T_USER_AVATAR }}</a>
+                </div>
                 {% endif %}
                 {% if TPL_VIEW_USERNAME and L2T_USERNAME %}
                     <span {% if L2T_USER_COLOUR %}style="color:#{{ L2T_USER_COLOUR }}" class="username-coloured"{% endif %}>{{ L2T_USERNAME }}</strong></span>
                 {% endif %}
             </dt>
-            {% if L2T_USER_RANK_TITLE or L2T_RANK_IMG_SRC %}
+            {% if TPL_VIEW_USERNAME %}
+                {% if L2T_USER_RANK_TITLE or L2T_RANK_IMG_SRC %}
                 <dd class="profile-rank">{{ L2T_USER_RANK_TITLE }}<br><img src="{{ L2T_RANK_IMG_SRC }}" alt="{{ L2T_RANK_IMG_ALT|e }}" /></dd>			
                 <dd class="profile-posts"><strong>{L_POSTS}{L_COLON}</strong> {{ L2T_USER_POSTS }}</dd>
                 <dd class="profile-joined"><strong>{L_JOINED}{L_COLON}</strong> {{ L2T_USER_REGDATE }}</dd>
+                {% endif %}
             {% endif %}
         </dl>
     </div>
+    {% endif %}
     <div class="l2t-right">
         <p class="l2t-popup-text">
             <span style="color:#8f8f8f;">
