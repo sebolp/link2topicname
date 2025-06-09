@@ -239,12 +239,14 @@
 			$counter_add = $this->get_word_bbcode_count($post_excerpt);
 			$max_length = $this->settings['car_length'] + $counter_add ?? 120;
 
-			if ($max_length > 0 && mb_strlen($post_excerpt) > $max_length) {
+			if ($max_length > 0 && mb_strlen($post_excerpt) > $max_length)
+			{
 				$truncated = mb_substr($post_excerpt, 0, $max_length);
 
 				$last_space = mb_strrpos($truncated, ' ');
 
-				if ($last_space !== false) {
+				if ($last_space !== false)
+				{
 					$truncated = mb_substr($truncated, 0, $last_space);
 				}
 
