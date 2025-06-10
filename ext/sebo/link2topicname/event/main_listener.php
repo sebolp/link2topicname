@@ -397,22 +397,22 @@
 					parse_str($query_str, $params);
 
 					$type = '';
- 					$id = 0;
+					$id = 0;
 					if (isset($params['f']))
- 					{
+					{
 						$type = 'f';
 						$id = (int) $params['f'];
- 					}
+					}
 					if (isset($params['t']))
- 					{
- 						$type = 't';
- 						$id = (int) $params['t'];
- 					}
+					{
+						$type = 't';
+						$id = (int) $params['t'];
+					}
 					if (isset($params['p']))
- 					{
+					{
 						$type = 'p';
 						$id = (int) $params['p'];
- 					}
+					}
 
 					if (!$type || !$id)
 					{
@@ -608,7 +608,7 @@
 							'TPL_VIEW_POPUP_SIG'    => $this->settings['view_popup_sig'],
 						]);
 					}
-				}				
+				}			
 
 				$template_name = ($item['mode'] === 'signature')
 				? '@sebo_link2topicname/edit_signature_template.html'
@@ -641,6 +641,6 @@
 				$post_row['SIGNATURE'] = $signature;
 			}
 
-			$event['post_row'] = $post_row;	
+			$event['post_row'] = $post_row;
 		}
-	}						
+	}
