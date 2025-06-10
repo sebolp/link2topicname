@@ -608,7 +608,7 @@
 							'TPL_VIEW_POPUP_SIG'    => $this->settings['view_popup_sig'],
 						]);
 					}
-				}			
+				}	
 
 				$template_name = ($item['mode'] === 'signature')
 				? '@sebo_link2topicname/edit_signature_template.html'
