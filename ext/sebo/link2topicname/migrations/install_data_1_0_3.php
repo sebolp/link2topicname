@@ -32,9 +32,10 @@ class install_data_1_0_3 extends \phpbb\db\migration\migration
 		if ($this->db_tools->sql_table_exists($l2t_table_settings) && $this->db_tools->sql_column_exists($l2t_table_settings, 'text_formatted'))
 		{
 			$data_1_0_3 = [
-				['text_formatted' => 1],
+				'text_formatted' => 1,
 			];
-			$this->db->sql_multi_insert($this->table_prefix . 'sebo_l2t_settings', $data_1_0_3);
+			$sql = 'UPDATE ' . $l2t_table_settings . ' SET ' . $this->db->sql_build_array('UPDATE', $data_1_0_3);
+			$this->db->sql_query($sql);
 		}
 	}
 }

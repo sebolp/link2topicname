@@ -37,16 +37,16 @@ $lang = array_merge($lang, [
 	'PP_ME_EXT_THX'		=> 'It would be greatly appreciated. Thank you for downloading LINK2TOPICNAME!',
 	'PP_ME_EXT_ALT'			=> 'Donate via PayPal',
 
-	'ACP_ENABLE_POPUP_TITLE'     => 'Enable post popup display',
+	'ACP_ENABLE_POPUP_TITLE'     => 'Post popup display',
 	'ACP_SETTINGS_TITLE'         => 'Message preview popup settings',
 
-	'ACP_LINK2TOPICNAME_ENABLE_POPUP_REQ' => 'Do you want to display the post popup preview?',
+	'ACP_LINK2TOPICNAME_ENABLE_POPUP_REQ' => 'Display the post popup preview?',
 
 	'ACP_LINK2TOPICNAME_CAR_LENGTH'       => 'Set the character length of the post preview (0 means full post)',
-	'ACP_LINK2TOPICNAME_VIEW_TEXT'        => 'Do you want to display the message preview?',
-	'ACP_LINK2TOPICNAME_VIEW_AVATAR'      => 'Do you want to display the poster avatar?',
-	'ACP_LINK2TOPICNAME_VIEW_FORUM'       => 'Do you want to display the source forum?',
-	'ACP_LINK2TOPICNAME_VIEW_USERNAME'    => 'Do you want to display the original poster?',
+	'ACP_LINK2TOPICNAME_VIEW_TEXT'        => 'Display the message preview?',
+	'ACP_LINK2TOPICNAME_VIEW_AVATAR'      => 'Display the poster avatar?',
+	'ACP_LINK2TOPICNAME_VIEW_FORUM'       => 'Display the source forum?',
+	'ACP_LINK2TOPICNAME_VIEW_USERNAME'    => 'Display the original poster?',
 
 	'L2TN_UPDATED'						=> 'Settings updated',
 	'L2TN_NOT_UPDATED'					=> 'Settings not updated',
@@ -55,6 +55,12 @@ $lang = array_merge($lang, [
 	'RETURN_ACP' => 'Return to the <a href="%s">Control Panel</a>',
 
 	/* >=1_0_3 */
-	'ACP_LINK2TOPICNAME_VIEW_BBCODE' => 'Do you want to enable bbcodes, "magic_urls" and smilies in popups?',
+	'ACP_LINK2TOPICNAME_VIEW_BBCODE' => 'Enable bbcodes, "magic_urls" and smilies in popups?',
+	/* >=1_0_5 */
+	'ACP_MESSAGE_SUB_TITLE'			=> 'Post replacement options',
+	'ACP_SIGNATURE_SUB_TITLE'			=> 'Signature replacement options',
+	'ACP_COMMON_SUB_TITLE'			=> 'Common options',
+	'ACP_LINK2TOPICNAME_ENABLE_SIG'	=> 'Enable signature link replacement?',
+	'ACP_LINK2TOPICNAME_CAR_LENGTH_EXT' => 'Note: The number of character set and the real one may vary slightly due to bbcode',
 
 ]);

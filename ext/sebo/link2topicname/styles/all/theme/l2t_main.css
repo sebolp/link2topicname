@@ -3,14 +3,14 @@
   display: none;
   max-width: 450px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 7px;
   padding: 1em;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
   z-index: 9999;
-  overflow-wrap: break-word;  /* spezza parole troppo lunghe */
-  word-wrap: break-word;      /* compatibilità */
-  white-space: normal;        /* fa andare a capo */
-  box-sizing: border-box;     /* considera padding e bordo nel calcolo larghezza */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
+  box-sizing: border-box;
 }
 @media (max-width: 450px) {
     .l2t-popup-global {
@@ -18,10 +18,48 @@
     }
 }
 
+.l2t-popup-global img {
+    max-width: 100% !important;
+    height: auto !important;
+    box-sizing: border-box;
+}
+
+.l2t-popup-global .codebox {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+}
+
+.l2t-popup-global .codebox pre,
+.l2t-popup-global .codebox code {
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    word-wrap: break-word !important;
+    overflow-x: auto !important;
+}
+
+.l2t-popup-right {
+    min-width: 0 !important;
+    overflow-x: auto !important;
+}
+
+.l2t-popup-content {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.l2t-text {
+    font-family:Lucida Grande, Trebuchet MS, Verdana, Helvetica, Arial, sans-serif;
+    font-size:1.2em;
+    line-height:1.4em;
+}
+
 .l2t-popup-global p,
 .l2t-popup-global small,
 .l2t-popup-global span {
-  word-break: break-word;  /* forza la rottura */
+  word-break: break-word;
   overflow-wrap: break-word;
   white-space: normal;
 }
@@ -30,9 +68,9 @@
 .l2t-popup-global.arrow-down::before {
   content: "";
   position: absolute;
-  bottom: 100%; /* per arrow-up */
-  top: 100%;    /* per arrow-down */
-  left: var(--arrow-left, 20px); /* posizione dinamica */
+  bottom: 100%;
+  top: 100%;
+  left: var(--arrow-left, 20px);
   border: 8px solid transparent;
 }
 
@@ -76,9 +114,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  font-size: 1.7em; /* simile a fa-stack-2x */
+  font-size: 1.7em;
   transform: translate(-45%, -45%);
   color: red;
-  pointer-events: none; /* per non interferire con click */
-  z-index: 5; /* sopra bg e fg */
+  pointer-events: none;
+  z-index: 5;
 }

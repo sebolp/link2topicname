@@ -83,6 +83,13 @@ class acp_controller
 			'TPL_VIEW_TEXT'     => (bool) $settings['view_text'],
 			'TPL_VIEW_BBCODE'     => (bool) $settings['text_formatted'],
 			'TPL_CAR_LENGTH'    => (int) $settings['car_length'],
+			'TPL_ENABLE_SIG' => (bool) $settings['enable_l2tsignature'],
+			'TPL_VIEW_USERNAME_SIG' => (bool) $settings['view_username_sig'],
+			'TPL_VIEW_AVATAR_SIG'   => (bool) $settings['view_avatar_sig'],
+			'TPL_VIEW_FORUM_SIG'    => (bool) $settings['view_forum_sig'],
+			'TPL_VIEW_POPUP_SIG'    => (bool) $settings['view_popup_sig'],
+			'TPL_VIEW_TEXT_SIG'     => (bool) $settings['view_text_sig'],
+			'TPL_VIEW_BBCODE_SIG'     => (bool) $settings['text_formatted_sig'],
 		];
 
 		$this->template->assign_vars($template_vars_settings);
@@ -106,6 +113,13 @@ class acp_controller
 				$view_text     = (int) $this->request->variable('view_text', 1);
 				$view_avatar   = (int) $this->request->variable('view_avatar', 1);
 				$view_bbcode   = (int) $this->request->variable('view_bbcode', 1);
+				$enable_l2tsignature = (int) $this->request->variable('enable_sig', 1);
+				$view_username_sig = (int) $this->request->variable('view_username_sig', 1);
+				$view_forum_sig    = (int) $this->request->variable('view_forum_sig', 1);
+				$view_popup_sig    = (int) $this->request->variable('view_popup_sig', 1);
+				$view_text_sig     = (int) $this->request->variable('view_text_sig', 1);
+				$view_avatar_sig   = (int) $this->request->variable('view_avatar_sig', 1);
+				$view_bbcode_sig   = (int) $this->request->variable('view_bbcode_sig', 1);
 				$car_length    = (int) $this->request->variable('car_length', 120);
 
 				$sql = 'UPDATE `' . $this->table_prefix . 'sebo_l2t_settings`
@@ -115,6 +129,13 @@ class acp_controller
 						`view_text` = ' . $view_text . ',
 						`view_avatar` = ' . $view_avatar . ',
 						`text_formatted` = ' . $view_bbcode . ',
+						`view_username_sig` = ' . $view_username_sig . ',
+						`view_forum_sig` = ' . $view_forum_sig . ',
+						`view_popup_sig` = ' . $view_popup_sig . ',
+						`view_text_sig` = ' . $view_text_sig . ',
+						`view_avatar_sig` = ' . $view_avatar_sig . ',
+						`text_formatted_sig` = ' . $view_bbcode_sig . ',
+						`enable_l2tsignature` = ' . $enable_l2tsignature . ',
 						`car_length` = ' . $car_length;
 
 				$this->db->sql_query($sql);

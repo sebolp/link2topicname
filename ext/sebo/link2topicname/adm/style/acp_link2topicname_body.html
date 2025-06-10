@@ -31,103 +31,220 @@
 	</fieldset>
 	
 	<fieldset>
-		<legend>{{ lang('ACP_ENABLE_POPUP_TITLE') }}</legend>
-		<dl>
-			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_ENABLE_POPUP_REQ') ~ lang('COLON') }}</strong></dt>
-			<dd>
-				<label for="view_popup_1">
-					<input type="radio" class="radio" name="view_popup" id="view_popup_1" value="1" {% if TPL_VIEW_POPUP %}checked="checked"{% endif %} />
-					{{ lang('YES') }}
-				</label>
-				<label for="view_popup_0">
-					<input type="radio" class="radio" name="view_popup" id="view_popup_0" value="0" {% if not TPL_VIEW_POPUP %}checked="checked"{% endif %} />
-					{{ lang('NO') }}
-				</label>
-			</dd>
-		</dl>
+		<legend>{{ lang('ACP_MESSAGE_SUB_TITLE') }}</legend>
+		<fieldset>
+			<legend>{{ lang('ACP_ENABLE_POPUP_TITLE') }}</legend>
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_ENABLE_POPUP_REQ') }}</strong></dt>
+				<dd>
+					<label for="view_popup_1">
+						<input type="radio" class="radio" name="view_popup" id="view_popup_1" value="1" {% if TPL_VIEW_POPUP %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_popup_0">
+						<input type="radio" class="radio" name="view_popup" id="view_popup_0" value="0" {% if not TPL_VIEW_POPUP %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+		</fieldset>
+		
+		<fieldset>
+			<legend>{{ lang('ACP_SETTINGS_TITLE') }}</legend>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_USERNAME') }}</strong></dt>
+				<dd>
+					<label for="view_username_1">
+						<input type="radio" class="radio" name="view_username" id="view_username_1" value="1" {% if TPL_VIEW_USERNAME %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_username_0">
+						<input type="radio" class="radio" name="view_username" id="view_username_0" value="0" {% if not TPL_VIEW_USERNAME %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_AVATAR') }}</strong></dt>
+				<dd>
+					<label for="view_avatar_1">
+						<input type="radio" class="radio" name="view_avatar" id="view_avatar_1" value="1" {% if TPL_VIEW_AVATAR %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_avatar_0">
+						<input type="radio" class="radio" name="view_avatar" id="view_avatar_0" value="0" {% if not TPL_VIEW_AVATAR %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_FORUM') }}</strong></dt>
+				<dd>
+					<label for="view_forum_1">
+						<input type="radio" class="radio" name="view_forum" id="view_forum_1" value="1" {% if TPL_VIEW_FORUM %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_forum_0">
+						<input type="radio" class="radio" name="view_forum" id="view_forum_0" value="0" {% if not TPL_VIEW_FORUM %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_TEXT') }}</strong></dt>
+				<dd>
+					<label for="view_text_1">
+						<input type="radio" class="radio" name="view_text" id="view_text_1" value="1" {% if TPL_VIEW_TEXT %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_text_0">
+						<input type="radio" class="radio" name="view_text" id="view_text_0" value="0" {% if not TPL_VIEW_TEXT %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_BBCODE') }}</strong></dt>
+				<dd>
+					<label for="view_bbcode_1">
+						<input type="radio" class="radio" name="view_bbcode" id="view_bbcode_1" value="1" {% if TPL_VIEW_BBCODE %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_bbcode_0">
+						<input type="radio" class="radio" name="view_bbcode" id="view_bbcode_0" value="0" {% if not TPL_VIEW_BBCODE %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+		</fieldset>
 	</fieldset>
 	
 	<fieldset>
-		<legend>{{ lang('ACP_SETTINGS_TITLE') }}</legend>
-
+		<legend>{{ lang('ACP_SIGNATURE_SUB_TITLE') }}</legend>
+		
 		<dl>
-			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_USERNAME') }}</strong></dt>
+			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_ENABLE_SIG') }}</strong></dt>
 			<dd>
-				<label for="view_username_1">
-					<input type="radio" class="radio" name="view_username" id="view_username_1" value="1" {% if TPL_VIEW_USERNAME %}checked="checked"{% endif %} />
+				<label for="enable_sig_1">
+					<input type="radio" class="radio" name="enable_sig" id="enable_sig_1" value="1" {% if TPL_ENABLE_SIG %}checked="checked"{% endif %} />
 					{{ lang('YES') }}
 				</label>
-				<label for="view_username_0">
-					<input type="radio" class="radio" name="view_username" id="view_username_0" value="0" {% if not TPL_VIEW_USERNAME %}checked="checked"{% endif %} />
-					{{ lang('NO') }}
-				</label>
-			</dd>
-		</dl>
-
-		<dl>
-			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_FORUM') }}</strong></dt>
-			<dd>
-				<label for="view_forum_1">
-					<input type="radio" class="radio" name="view_forum" id="view_forum_1" value="1" {% if TPL_VIEW_FORUM %}checked="checked"{% endif %} />
-					{{ lang('YES') }}
-				</label>
-				<label for="view_forum_0">
-					<input type="radio" class="radio" name="view_forum" id="view_forum_0" value="0" {% if not TPL_VIEW_FORUM %}checked="checked"{% endif %} />
-					{{ lang('NO') }}
-				</label>
-			</dd>
-		</dl>
-
-		<dl>
-			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_AVATAR') }}</strong></dt>
-			<dd>
-				<label for="view_avatar_1">
-					<input type="radio" class="radio" name="view_avatar" id="view_avatar_1" value="1" {% if TPL_VIEW_AVATAR %}checked="checked"{% endif %} />
-					{{ lang('YES') }}
-				</label>
-				<label for="view_avatar_0">
-					<input type="radio" class="radio" name="view_avatar" id="view_avatar_0" value="0" {% if not TPL_VIEW_AVATAR %}checked="checked"{% endif %} />
-					{{ lang('NO') }}
-				</label>
-			</dd>
-		</dl>
-
-		<dl>
-			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_TEXT') }}</strong></dt>
-			<dd>
-				<label for="view_text_1">
-					<input type="radio" class="radio" name="view_text" id="view_text_1" value="1" {% if TPL_VIEW_TEXT %}checked="checked"{% endif %} />
-					{{ lang('YES') }}
-				</label>
-				<label for="view_text_0">
-					<input type="radio" class="radio" name="view_text" id="view_text_0" value="0" {% if not TPL_VIEW_TEXT %}checked="checked"{% endif %} />
+				<label for="enable_sig_0">
+					<input type="radio" class="radio" name="enable_sig" id="enable_sig_0" value="0" {% if not TPL_ENABLE_SIG %}checked="checked"{% endif %} />
 					{{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
 		
+		<fieldset>
+			<legend>{{ lang('ACP_ENABLE_POPUP_TITLE') }}</legend>
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_ENABLE_POPUP_REQ') }}</strong></dt>
+				<dd>
+					<label for="view_popup_sig_1">
+						<input type="radio" class="radio" name="view_popup_sig" id="view_popup_sig_1" value="1" {% if TPL_VIEW_POPUP_SIG %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_popup_sig_0">
+						<input type="radio" class="radio" name="view_popup_sig" id="view_popup_sig_0" value="0" {% if not TPL_VIEW_POPUP_SIG %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+		</fieldset>
+		
+		<fieldset>
+			<legend>{{ lang('ACP_SETTINGS_TITLE') }}</legend>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_USERNAME') }}</strong></dt>
+				<dd>
+					<label for="view_username_sig_1">
+						<input type="radio" class="radio" name="view_username_sig" id="view_username_sig_1" value="1" {% if TPL_VIEW_USERNAME_SIG %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_username_sig_0">
+						<input type="radio" class="radio" name="view_username_sig" id="view_username_sig_0" value="0" {% if not TPL_VIEW_USERNAME_SIG %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_AVATAR') }}</strong></dt>
+				<dd>
+					<label for="view_avatar_sig_1">
+						<input type="radio" class="radio" name="view_avatar_sig" id="view_avatar_sig_1" value="1" {% if TPL_VIEW_AVATAR_SIG %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_avatar_sig_0">
+						<input type="radio" class="radio" name="view_avatar_sig" id="view_avatar_sig_0" value="0" {% if not TPL_VIEW_AVATAR_SIG %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_FORUM') }}</strong></dt>
+				<dd>
+					<label for="view_forum_sig_1">
+						<input type="radio" class="radio" name="view_forum_sig" id="view_forum_sig_1" value="1" {% if TPL_VIEW_FORUM_SIG %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_forum_sig_0">
+						<input type="radio" class="radio" name="view_forum_sig" id="view_forum_sig_0" value="0" {% if not TPL_VIEW_FORUM_SIG %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_TEXT') }}</strong></dt>
+				<dd>
+					<label for="view_text_sig_1">
+						<input type="radio" class="radio" name="view_text_sig" id="view_text_sig_1" value="1" {% if TPL_VIEW_TEXT_SIG %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_text_sig_0">
+						<input type="radio" class="radio" name="view_text_sig" id="view_text_sig_0" value="0" {% if not TPL_VIEW_TEXT_SIG %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_BBCODE') }}</strong></dt>
+				<dd>
+					<label for="view_bbcode_sig_1">
+						<input type="radio" class="radio" name="view_bbcode_sig" id="view_bbcode_sig_1" value="1" {% if TPL_VIEW_BBCODE_SIG %}checked="checked"{% endif %} />
+						{{ lang('YES') }}
+					</label>
+					<label for="view_bbcode_sig_0">
+						<input type="radio" class="radio" name="view_bbcode_sig" id="view_bbcode_sig_0" value="0" {% if not TPL_VIEW_BBCODE_SIG %}checked="checked"{% endif %} />
+						{{ lang('NO') }}
+					</label>
+				</dd>
+			</dl>
+			
+		</fieldset>
+	</fieldset>
+	
+	<fieldset>
+		<legend>{{ lang('ACP_COMMON_SUB_TITLE') }}</legend>
 		<dl>
-			<dt><strong>{{ lang('ACP_LINK2TOPICNAME_VIEW_BBCODE') }}</strong></dt>
-			<dd>
-				<label for="view_bbcode_1">
-					<input type="radio" class="radio" name="view_bbcode" id="view_bbcode_1" value="1" {% if TPL_VIEW_BBCODE %}checked="checked"{% endif %} />
-					{{ lang('YES') }}
-				</label>
-				<label for="view_bbcode_0">
-					<input type="radio" class="radio" name="view_bbcode" id="view_bbcode_0" value="0" {% if not TPL_VIEW_BBCODE %}checked="checked"{% endif %} />
-					{{ lang('NO') }}
-				</label>
-			</dd>
-		</dl>
-
-		<dl>
-			<dt><label for="car_length"><strong>{{ lang('ACP_LINK2TOPICNAME_CAR_LENGTH') ~ lang('COLON') }}</strong></label></dt>
+			<dt><label for="car_length"><strong>{{ lang('ACP_LINK2TOPICNAME_CAR_LENGTH') ~ lang('COLON') }}</strong><br><em style="font-size:smaller">{{ lang('ACP_LINK2TOPICNAME_CAR_LENGTH_EXT') }}</em></label></dt>
 			<dd>
 				<input type="text" name="car_length" id="car_length" value="{{ TPL_CAR_LENGTH }}" />
 			</dd>
 		</dl>
 	</fieldset>
-
+	
 	<fieldset class="submit-buttons">
 		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />
 		{{ S_FORM_TOKEN }}

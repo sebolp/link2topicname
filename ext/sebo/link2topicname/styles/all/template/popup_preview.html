@@ -1,20 +1,18 @@
-<!-- INCLUDECSS @sebo_link2topicname/l2t_main.css -->
-<!-- INCLUDEJS @sebo_link2topicname/view_popup.js -->
-<div class="l2t-popup-content" style="display: flex; gap: 1rem; align-items: flex-start;">
-    {% if TPL_VIEW_USERNAME or TPL_VIEW_AVATAR %}
+<div class="l2t-popup-content">
+    {% if TPL_VIEW_USERNAME or TPL_VIEW_AVATAR or TPL_VIEW_USERNAME_SIG or TPL_VIEW_AVATAR_SIG %}
     <div class="l2t-left" style="min-width: {{ L2T_USER_AVATAR_W }}px;">
         <dl>
             <dt class="{% if L2T_USER_RANK_TITLE or L2T_RANK_IMG_SRC %}has-profile-rank{% else %}no-profile-rank{% endif %} {% if TPL_VIEW_AVATAR %}{% if L2T_USER_AVATAR %}has-avatar{% else %}no-avatar{% endif %}{% endif %}">
-				{% if TPL_VIEW_AVATAR and L2T_USER_AVATAR %}
+				{% if TPL_VIEW_AVATAR or TPL_VIEW_AVATAR_SIG and L2T_USER_AVATAR %}
                 <div class="avatar-container">
                     <a class="avatar">{{ L2T_USER_AVATAR }}</a>
                 </div>
                 {% endif %}
-                {% if TPL_VIEW_USERNAME and L2T_USERNAME %}
+                {% if TPL_VIEW_USERNAME or TPL_VIEW_USERNAME_SIG and L2T_USERNAME %}
                     <span {% if L2T_USER_COLOUR %}style="color:#{{ L2T_USER_COLOUR }}" class="username-coloured"{% endif %}>{{ L2T_USERNAME }}</strong></span>
                 {% endif %}
             </dt>
-            {% if TPL_VIEW_USERNAME %}
+            {% if TPL_VIEW_USERNAME or TPL_VIEW_USERNAME_SIG %}
                 {% if L2T_USER_RANK_TITLE or L2T_RANK_IMG_SRC %}
                 <dd class="profile-rank">{{ L2T_USER_RANK_TITLE }}<br><img src="{{ L2T_RANK_IMG_SRC }}" alt="{{ L2T_RANK_IMG_ALT|e }}" /></dd>			
                 <dd class="profile-posts"><strong>{L_POSTS}{L_COLON}</strong> {{ L2T_USER_POSTS }}</dd>
@@ -33,12 +31,12 @@
                 <strong>{{ L2T_TOPIC_TITLE }}</strong>
                 {% endif %}
                 
-                {% if TPL_VIEW_FORUM and L2T_FORUM_NAME %}
+                {% if TPL_VIEW_FORUM or TPL_VIEW_FORUM_SIG and L2T_FORUM_NAME %}
                 <small><em>{{ L2T_FORUM_NAME }}</em></small>
                 {% endif %}
             </span>
-            {% if TPL_VIEW_TEXT and L2T_POST_EXCERPT %}
-                <br><span style="font-family:Lucida Grande, Trebuchet MS, Verdana, Helvetica, Arial, sans-serif; font-size:1.2em; line-height:1.4em;" class="content">{{ L2T_POST_EXCERPT }}</span>
+            {% if TPL_VIEW_TEXT or TPL_VIEW_TEXT_SIG and L2T_POST_EXCERPT %}
+                <br><span class="content l2t-text">{{ L2T_POST_EXCERPT }}</span>
             {% endif %}
         </p>
     </div>

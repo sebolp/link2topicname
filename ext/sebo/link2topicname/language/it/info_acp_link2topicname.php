@@ -56,5 +56,11 @@ $lang = array_merge($lang, [
 
 	/* >=1_0_3 */
 	'ACP_LINK2TOPICNAME_VIEW_BBCODE' => 'Vuoi visualizzare bbcodes, "magic_urls" e smilies nel popups?',
+	/* >=1_0_5 */
+	'ACP_MESSAGE_SUB_TITLE'			=> 'Impostazioni messaggio',
+	'ACP_SIGNATURE_SUB_TITLE'			=> 'Impostazioni firma',
+	'ACP_COMMON_SUB_TITLE'			=> 'Impostazioni globali',
+	'ACP_LINK2TOPICNAME_ENABLE_SIG'	=> 'Attivare la sostituzione dei link nella firma?',
+	'ACP_LINK2TOPICNAME_CAR_LENGTH_EXT' => 'Ricorda: il numero di caratteri impostati può differire leggermente a causa del bbcode',
 
 ]);

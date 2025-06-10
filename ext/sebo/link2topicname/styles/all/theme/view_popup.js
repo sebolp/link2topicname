@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const popup = document.createElement('div');
   popup.className = 'l2t-popup-global';
 
-  //Imposta il background del popup uguale a quello del body
   const bodyBg = getComputedStyle(document.body).backgroundColor;
   popup.style.backgroundColor = bodyBg;
 
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const marginLeft = (linkWidth - 450) / 2;
         popup.style.marginLeft = `${marginLeft}px`;
       } else {
-        popup.style.marginLeft = '0px'; // reset se non supera 450
+        popup.style.marginLeft = '0px';
       }
 
       const popupWidth = popupRect.width;
