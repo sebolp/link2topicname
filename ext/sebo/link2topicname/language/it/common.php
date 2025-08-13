@@ -22,4 +22,6 @@ $lang = array_merge($lang, [
 	/* >=1_0_3 */
 	'L2T_ALERT_NO_LINK' => 'Attenzione',
 	'L2T_ALERT_NO_LINK_EXPLAIN' => 'l\'argomento di questo link non esiste!',
+	/* >=1_0_6 */
+	'L2T_ALERT_CANNOT_VIEW' => 'non puoi visualizzare questo collegamento!',
 ]);

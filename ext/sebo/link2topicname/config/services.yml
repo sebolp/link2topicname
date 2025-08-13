@@ -20,5 +20,6 @@ services:
             - '%core.php_ext%'
             - '%core.root_path%'
             - '%core.table_prefix%'
+            - '@auth'
         tags:
             - { name: event.listener }

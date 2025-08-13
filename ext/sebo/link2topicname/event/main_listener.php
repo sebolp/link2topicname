@@ -40,6 +40,9 @@
 		/** @var table_prefix */
 		protected $table_prefix;
 
+		/** @var \phpbb\auth\auth */
+		protected $auth;
+
 		/** @var array */
 		protected $settings = [];
 
@@ -50,7 +53,8 @@
 		\phpbb\template\template $template,
 		$php_ext,
 		$phpbb_root_path,
-		$table_prefix
+		$table_prefix,
+		\phpbb\auth\auth $auth
 		)
 		{
 			$this->language = $language;
@@ -59,6 +63,7 @@
 			$this->php_ext = $php_ext;
 			$this->phpbb_root_path = $phpbb_root_path;
 			$this->table_prefix = $table_prefix;
+			$this->auth = $auth;
 			$this->load_settings();
 		}
 
@@ -110,6 +115,11 @@
 			'lang_set' => 'common',
 			];
 			$event['lang_set_ext'] = $lang_set_ext;
+		}
+
+		protected function check_l2treading_permission($forum_id)
+		{
+			return $this->auth->acl_gets('f_read', $forum_id);
 		}
 
 		protected function get_user_info(int $user_id): array
@@ -441,7 +451,7 @@
 						$data_f = [
 							'forum_id' => (int) $id,
 						];
-						$sql = 'SELECT forum_name
+						$sql = 'SELECT forum_name, forum_id
 						FROM ' . FORUMS_TABLE . '
 						WHERE ' . $this->db->sql_build_array('SELECT', $data_f);
 						$result = $this->db->sql_query($sql);
@@ -451,6 +461,7 @@
 						if ($row)
 						{
 							$forum_name = $row['forum_name'];
+							$permission_forum = $this->check_l2treading_permission($row['forum_name']);
 						}
 					}
 
@@ -463,11 +474,13 @@
 						$topic_id = $post_info['topic_id'] ?? 0;
 						$user_info = $post_info['user_info'] ?? [];
 						$topic_title = $this->get_topic_info($topic_id)['topic_title'] ?? '';
+						$permission_topic = $this->check_l2treading_permission($post_info['forum_id']);
 					}
 
 					if ($type === 't')
 					{
 						$topic_info = $this->get_topic_info($id);
+						//$permission_topic = $this->check_l2treading_permission($id);
 						if ($topic_info)
 						{
 							$topic_title = $topic_info['topic_title'];
@@ -477,6 +490,7 @@
 							$forum_id = $post_info['forum_id'] ?? 0;
 							$topic_id = $post_info['topic_id'] ?? 0;
 							$user_info = $post_info['user_info'] ?? [];
+							$permission_topic = $this->check_l2treading_permission($post_info['forum_id']);
 						}
 					}
 
@@ -526,6 +540,7 @@
 						'full_url'         => $full_url,
 						'mode'             => $mode,
 						'type'             => $type,
+						'permission_topic' => $permission_topic ? 1 : 0,
 						'TPL_POST_FOUND'   => in_array($type, ['p', 't']) && !empty($post_subject),
 						'TPL_FORUM_FOUND'  => $type === 'f' && !empty($forum_name),
 					];
@@ -563,6 +578,8 @@
 				}
 
 				$popup_vars = array_merge($template_vars_settings, [
+					'CAN_VIEW_TOPIC'    => $item['permission_topic'] ?? 0,
+					'CAN_VIEW_FORUM'    => $item['permission_forum'] ?? 0,
 					'L2T_POST_SUBJECT'    => $item['post_subject'],
 					'L2T_POST_EXCERPT'    => $item['post_excerpt'],
 					'L2T_TOPIC_TITLE'     => $item['topic_title'],
@@ -594,6 +611,7 @@
 				if ($item['TPL_POST_FOUND'])
 				{
 					$replacement_data = array_merge($replacement_data, [
+						'CAN_VIEW_TOPIC'    => $item['permission_topic'] ?? 0,
 						'L2T_POST_SUBJECT'  => $item['post_subject'],
 						'L2T_TOPIC_TITLE'   => $item['topic_title'],
 						'TPL_VIEW_POPUP'    => $this->settings['view_popup'],

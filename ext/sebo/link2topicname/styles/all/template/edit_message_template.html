@@ -1,22 +1,29 @@
 {% if TPL_POST_FOUND %}
-<a href="{{ L2T_HREF }}" class="l2t-link" {% if TPL_VIEW_POPUP %}data-popup="{{ L2T_POPUP_HTML|e('html_attr') }}{% endif %}">
-  <span class="icon-stack">
-    <i class="fa fa-square bg"></i>
-    <i class="fa fa-link fg fa-inverse"></i>
-  </span>
-  {% if L2T_POST_SUBJECT and L2T_POST_SUBJECT and L2T_POST_SUBJECT != L2T_TOPIC_TITLE %}
-    {{ L2T_POST_SUBJECT }} in <strong>{{ L2T_TOPIC_TITLE }}</strong>
-  {% else %}
-    <strong>{{ L2T_TOPIC_TITLE }}</strong>
-  {% endif %}
-</a>
+  <a href="{{ L2T_HREF }}" class="l2t-link" {% if TPL_VIEW_POPUP %}data-popup="{{ L2T_POPUP_HTML|e('html_attr') }}{% endif %}">
+    <span class="icon-stack">
+      <i class="fa fa-square bg"></i>
+      <i class="fa fa-link fg fa-inverse"></i>
+    </span>
+    {% if CAN_VIEW_TOPIC %}
+      {% if L2T_POST_SUBJECT and L2T_POST_SUBJECT and L2T_POST_SUBJECT != L2T_TOPIC_TITLE and L2T_POST_SUBJECT != 'Re: ' ~ L2T_TOPIC_TITLE %}
+        {{ L2T_POST_SUBJECT }} in <strong>{{ L2T_TOPIC_TITLE }}</strong>
+      {% else %}
+        {% if L2T_POST_SUBJECT == 'Re: ' ~ L2T_TOPIC_TITLE %}
+          Re: 
+        {% endif %}
+        <strong>{{ L2T_TOPIC_TITLE }}</strong>
+      {% endif %}
+    {% else %}
+      <strong>{{ lang('L2T_ALERT_NO_LINK') ~ lang('COLON') }}</strong> {{ lang('L2T_ALERT_CANNOT_VIEW') }}
+    {% endif %}
+  </a>
 {% elseif TPL_FORUM_FOUND %}
   <a href="{{ L2T_HREF }}">
     <span class="icon-stack">
       <i class="fa fa-square bg"></i>
       <i class="fa fa-folder fg fa-inverse"></i>
     </span>
-    <strong>{{ L2T_FORUM_NAME|e }}</strong>
+      {% if CAN_VIEW_TOPIC %}<strong>{{ L2T_FORUM_NAME }}</strong>{% else %}<strong>{{ lang('L2T_ALERT_NO_LINK') ~ lang('COLON') }}</strong> {{ lang('L2T_ALERT_CANNOT_VIEW') }}{% endif %}
   </a>
 {% else %}
 <a href="{{ L2T_HREF }}">

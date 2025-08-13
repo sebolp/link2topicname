@@ -1,3 +1,4 @@
+{% if CAN_VIEW_TOPIC %}
 <div class="l2t-popup-content">
     {% if TPL_VIEW_USERNAME or TPL_VIEW_AVATAR or TPL_VIEW_USERNAME_SIG or TPL_VIEW_AVATAR_SIG %}
     <div class="l2t-left" style="min-width: {{ L2T_USER_AVATAR_W }}px;">
@@ -42,3 +43,4 @@
     </div>
     <div class="l2t-popup-arrow"></div>
 </div>
+{% endif %}
