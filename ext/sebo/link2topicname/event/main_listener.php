@@ -119,7 +119,7 @@
 
 		protected function check_l2treading_permission($forum_id)
 		{
-			return $this->auth->acl_gets('f_read', $forum_id);
+			return $this->auth->acl_get('f_read', $forum_id);
 		}
 
 		protected function get_user_info(int $user_id): array
@@ -461,7 +461,7 @@
 						if ($row)
 						{
 							$forum_name = $row['forum_name'];
-							$permission_forum = $this->check_l2treading_permission($row['forum_name']);
+							$permission_forum = $this->check_l2treading_permission($row['forum_id']);
 						}
 					}
 
@@ -480,7 +480,6 @@
 					if ($type === 't')
 					{
 						$topic_info = $this->get_topic_info($id);
-						//$permission_topic = $this->check_l2treading_permission($id);
 						if ($topic_info)
 						{
 							$topic_title = $topic_info['topic_title'];
@@ -495,7 +494,7 @@
 					}
 
 					// Forum name
-					if ($forum_id)
+					if (($forum_id)&&($type === 't')||($type === 'p'))
 					{
 						$data_f = [
 							'forum_id' => (int) $forum_id,
@@ -540,7 +539,8 @@
 						'full_url'         => $full_url,
 						'mode'             => $mode,
 						'type'             => $type,
-						'permission_topic' => $permission_topic ? 1 : 0,
+						'permission_topic' => !empty($permission_topic) ? 1 : 0,
+						'permission_forum' => !empty($permission_forum) ? 1 : 0,
 						'TPL_POST_FOUND'   => in_array($type, ['p', 't']) && !empty($post_subject),
 						'TPL_FORUM_FOUND'  => $type === 'f' && !empty($forum_name),
 					];
@@ -579,7 +579,6 @@
 
 				$popup_vars = array_merge($template_vars_settings, [
 					'CAN_VIEW_TOPIC'    => $item['permission_topic'] ?? 0,
-					'CAN_VIEW_FORUM'    => $item['permission_forum'] ?? 0,
 					'L2T_POST_SUBJECT'    => $item['post_subject'],
 					'L2T_POST_EXCERPT'    => $item['post_excerpt'],
 					'L2T_TOPIC_TITLE'     => $item['topic_title'],
@@ -605,7 +604,10 @@
 
 				if ($item['TPL_FORUM_FOUND'])
 				{
-					$replacement_data['L2T_FORUM_NAME'] = $item['forum_name'];
+					$replacement_data = array_merge($replacement_data, [
+					'CAN_VIEW_FORUM'    => $item['permission_forum'] ?? 0,
+					'L2T_FORUM_NAME' 	=> $item['forum_name'],
+					]);
 				}
 
 				if ($item['TPL_POST_FOUND'])

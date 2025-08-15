@@ -23,7 +23,7 @@
       <i class="fa fa-square bg"></i>
       <i class="fa fa-folder fg fa-inverse"></i>
     </span>
-      {% if CAN_VIEW_TOPIC %}<strong>{{ L2T_FORUM_NAME }}</strong>{% else %}<strong>{{ lang('L2T_ALERT_NO_LINK') ~ lang('COLON') }}</strong> {{ lang('L2T_ALERT_CANNOT_VIEW') }}{% endif %}
+      {% if CAN_VIEW_FORUM %}<strong>{{ L2T_FORUM_NAME }}</strong>{% else %}<strong>{{ lang('L2T_ALERT_NO_LINK') ~ lang('COLON') }}</strong> {{ lang('L2T_ALERT_CANNOT_VIEW') }}{% endif %}
   </a>
 {% else %}
 <a href="{{ L2T_HREF }}">
