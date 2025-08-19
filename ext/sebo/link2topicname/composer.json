@@ -3,7 +3,7 @@
     "type": "phpbb-extension",
     "description": "Converts internal link to topic name.",
     "homepage": "https://www.fiatpandaclub.org",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "time": "2025-08-15",
     "license": "GPL-2.0-only",
     "authors": [

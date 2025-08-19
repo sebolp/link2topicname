@@ -468,13 +468,16 @@
 					if ($type === 'p')
 					{
 						$post_info = $this->get_post_info($id, $mode);
-						$post_subject = $post_info['post_subject'] ?? '';
-						$post_excerpt = $post_info['post_excerpt'] ?? '';
-						$forum_id = $post_info['forum_id'] ?? 0;
-						$topic_id = $post_info['topic_id'] ?? 0;
-						$user_info = $post_info['user_info'] ?? [];
-						$topic_title = $this->get_topic_info($topic_id)['topic_title'] ?? '';
-						$permission_topic = $this->check_l2treading_permission($post_info['forum_id']);
+						if ($post_info)
+						{
+							$post_subject = $post_info['post_subject'] ?? '';
+							$post_excerpt = $post_info['post_excerpt'] ?? '';
+							$forum_id = $post_info['forum_id'] ?? 0;
+							$topic_id = $post_info['topic_id'] ?? 0;
+							$user_info = $post_info['user_info'] ?? [];
+							$topic_title = $this->get_topic_info($topic_id)['topic_title'] ?? '';
+							$permission_topic = $this->check_l2treading_permission($post_info['forum_id']);
+						}
 					}
 
 					if ($type === 't')
